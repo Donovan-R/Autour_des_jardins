@@ -14,7 +14,6 @@ const Tasks = ({ alert, showAlert, user }) => {
   const token = localStorage.getItem('token');
   const url = `${import.meta.env.VITE_URL}/tasks/`;
   const inputRef = useRef(null);
-
   //* focus
   useEffect(() => {
     inputRef.current.focus();

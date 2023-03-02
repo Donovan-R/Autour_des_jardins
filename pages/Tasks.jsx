@@ -16,7 +16,6 @@ const Tasks = ({ alert, showAlert, user }) => {
   const inputRef = useRef(null);
 
   //* focus
-
   useEffect(() => {
     inputRef.current.focus();
   }, [isEditing, taskAdded]);

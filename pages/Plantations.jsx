@@ -13,11 +13,6 @@ const Plantations = () => {
   let newTab = [...plantationsTab];
 
   const getAllPlants = async () => {
-    if (isLoading) {
-      <div>
-        <h2>chargement en cours</h2>
-      </div>;
-    }
     try {
       const { data } = await axios.get(url);
       setPlantationsTab(data.plants);
@@ -33,7 +28,15 @@ const Plantations = () => {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-
+  if (isLoading) {
+    return (
+      <section className='plantsSection'>
+        <div>
+          <h2>chargement en cours</h2>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className='plantsSection'>
       <div className='calendarTitle'>

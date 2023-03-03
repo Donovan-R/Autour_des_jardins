@@ -593,6 +593,7 @@ plants              |
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: calc(100vh - 148px);
+  overflow: hidden;
 }
 
 .plantsSection h2 {

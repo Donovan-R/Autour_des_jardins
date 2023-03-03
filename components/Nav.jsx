@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { linksPublic, linksPrivate } from '../src/data';
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '.././assets/logo.png';
 const Navbar = ({ token, setToken, user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +45,14 @@ const Navbar = ({ token, setToken, user }) => {
                   const { id, text, url } = link;
                   return (
                     <li key={id}>
-                      <Link to={url}>{text}</Link>
+                      <NavLink
+                        to={url}
+                        className={({ isActive }) =>
+                          isActive ? 'activeLink' : ''
+                        }
+                      >
+                        {text}
+                      </NavLink>
                     </li>
                   );
                 })}
@@ -56,19 +63,37 @@ const Navbar = ({ token, setToken, user }) => {
                   const { id, text, url } = link;
                   return (
                     <li key={id}>
-                      <Link to={url}>{text}</Link>
+                      <NavLink
+                        to={url}
+                        className={({ isActive }) =>
+                          isActive ? 'activeLink' : ''
+                        }
+                      >
+                        {text}
+                      </NavLink>
                     </li>
                   );
                 })}
                 {user.role === 2 && (
                   <li>
-                    <Link to='/dashboard'>Espace admin</Link>
+                    <NavLink
+                      to='/dashboard'
+                      className={({ isActive }) =>
+                        isActive ? 'activeLink' : ''
+                      }
+                    >
+                      Espace admin
+                    </NavLink>
                   </li>
                 )}
                 <li>
-                  <Link to='/' onClick={disconnectUser}>
+                  <NavLink
+                    to='/'
+                    onClick={disconnectUser}
+                    className={({ isActive }) => (isActive ? 'activeLink' : '')}
+                  >
                     se déconnecter
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             )}

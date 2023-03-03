@@ -325,6 +325,10 @@ nav {
     padding-top: 0.5rem;
     background: transparent;
   }
+
+  a.activeLink {
+    color: var(--clr-green-bcg);
+  }
   /* .social-icons {
     display: flex;
   } */

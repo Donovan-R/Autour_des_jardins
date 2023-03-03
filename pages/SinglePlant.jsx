@@ -106,8 +106,9 @@ const SinglePlant = () => {
             {sowing_date_start_inside && (
               <h3>
                 {' '}
-                Les semis se font sous abri du {sowing_date_start_inside} au
-                {sowing_date_end_inside}
+                Les semis se font sous abri du {
+                  sowing_date_start_inside
+                } au {sowing_date_end_inside}
               </h3>
             )}
             {sowing_date_start_outside && (

@@ -28,11 +28,11 @@ const Contact = ({ alert, showAlert, setToken }) => {
           <GiBirdHouse />
         </span>
       </Link> */}
-      {/* <div className='goUp'>
+      <div className='goUp'>
         <a href='#'>
           <FaRegPaperPlane />
         </a>
-      </div> */}
+      </div>
     </section>
   );
 };

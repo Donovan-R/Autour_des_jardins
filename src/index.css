@@ -83,32 +83,45 @@ h4 {
   letter-spacing: var(--spacing);
   line-height: 1.25;
   margin-bottom: 0.75rem;
+  font-size: 1rem;
 }
+
 h1 {
-  text-transform: capitalize;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
   color: var(--clr-green-dark);
+  text-transform: capitalize;
 }
+
 h2 {
+  font-size: 1.5rem;
   padding-bottom: 0.5rem;
-  font-size: 2rem;
   text-align: center;
 }
-h3 {
-  font-size: 1.25rem;
-}
-h4 {
-  font-size: 0.875rem;
-}
+
 p {
   margin-bottom: 1.25rem;
   color: var(--clr-green-deepDark);
 }
 
+@media screen and (min-width: 350px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 0.875rem;
+  }
+}
+
 @media screen and (min-width: 800px) {
   h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
   h2 {
     font-size: 2.5rem;
@@ -244,8 +257,14 @@ nav {
   transform: rotate(90deg);
 }
 .logo {
-  height: 100%;
+  width: 120px;
   border: solid 3px var(--clr-green-dark);
+}
+
+@media screen and (min-width: 350px) {
+  .logo {
+    height: 100%;
+  }
 }
 .links a {
   color: var(--clr-green-deepDark);
@@ -323,7 +342,7 @@ Form           |
 
 .contactSection {
   background-image: url('https://images.pexels.com/photos/612338/pexels-photo-612338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  padding: 2rem;
+  padding: 1rem;
   display: grid;
   place-items: center;
 }
@@ -339,24 +358,32 @@ Form           |
   display: grid;
   place-items: center;
 }
-
 .formContainer {
   border: solid 2px var(--clr-green-dark);
   background-color: var(--clr-green-light);
   color: var(--clr-green-dark);
-  padding: 2rem;
-  margin: 1rem;
-  width: 75%;
   max-width: 600px;
+  width: 90%;
+  margin: 1rem;
 }
 
 .formRow {
   display: grid;
+  place-items: center;
   padding-bottom: 0.5rem;
 }
 
 .formRow input {
   height: 2rem;
+}
+@media screen and (min-width: 500px) {
+  .formContainer {
+    padding: 2rem;
+    width: 75%;
+  }
+  .formRow {
+    place-items: unset;
+  }
 }
 
 .formRow input,
@@ -366,9 +393,9 @@ Form           |
   border: solid 1px var(--clr-green-middle);
 }
 
-/* .justificatifRow input {
-  display: block;
-} */
+.justificatifInput {
+  max-width: 100%;
+}
 
 .agreeCont {
   display: grid;
@@ -388,6 +415,14 @@ Form           |
   color: var(--clr-green-deepDark);
 }
 
+legend {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-style: oblique;
+  opacity: 0.8;
+  text-align: center;
+}
+
 /*
 ===========================
 to Do page                 |
@@ -398,15 +433,15 @@ to Do page                 |
 .formCont {
   display: grid;
   text-align: center;
+  width: 95%;
   background-color: rgba(37, 105, 47, 0.7);
-  width: 60%;
   margin: auto;
   border: solid 2px var(--clr-green-light);
   border-radius: 5%;
 }
 
 .inputToDo {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .inputToDo input {
@@ -415,10 +450,14 @@ to Do page                 |
   border: solid 1px var(--clr-green-light);
   height: 2rem;
 }
-
 .inputToDo input:focus {
   background-color: var(--clr-green-light);
   color: black;
+}
+@media screen and (min-width: 350px) {
+  .formCont {
+    width: 70%;
+  }
 }
 
 .inputToDo button {
@@ -486,7 +525,7 @@ to Do page                 |
 }
 
 .toDoSection {
-  height: 100%;
+  /* height: 100%; */
   min-height: 78vh;
   inset: 0;
   background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
@@ -502,16 +541,24 @@ to Do page                 |
 
 .editBtn,
 .deleteBtn {
-  font-size: 1rem;
-  border: solid 1px black;
+  border: none;
   border-radius: 10%;
   margin: 0.2rem;
-  padding: 0.3rem;
+  padding: 0.1rem;
+  border: solid 2px black;
+}
+
+@media screen and (min-width: 350px) {
+  .editBtn,
+  .deleteBtn {
+    font-size: 1rem;
+
+    padding: 0.3rem;
+  }
 }
 
 .editBtn {
   background-color: var(--clr-green-middle);
-  margin-left: 0.5rem;
 }
 .editBtn:hover {
   background-color: greenyellow;
@@ -542,10 +589,10 @@ plants              |
 
 .plantsSection {
   background-image: url('https://images.pexels.com/photos/5808/food-healthy-vegetables-village.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: calc(100vh - 176px);
 }
 
 .plantsSection h2 {
@@ -587,7 +634,7 @@ plants              |
 .plantCard {
   background-color: var(--clr-green-middle);
   margin-bottom: 2rem;
-  max-width: 20rem;
+  max-width: 15rem;
   box-shadow: var(--light-shadow);
   display: grid;
   grid-template-rows: auto 1fr;
@@ -595,8 +642,19 @@ plants              |
 }
 
 .plantCard img {
-  width: 19.8rem;
-  height: 17rem;
+  width: 14.8rem;
+  height: 13rem;
+}
+
+@media screen and (min-width: 350px) {
+  .plantCard {
+    max-width: 20rem;
+  }
+
+  .plantCard img {
+    width: 19.8rem;
+    height: 16rem;
+  }
 }
 
 .plant-footer {
@@ -759,7 +817,6 @@ dashboard   |
   width: 90vw;
   background-color: hsla(86, 97%, 54%, 30%);
   border: solid 1px hsla(105, 92%, 52%, 0.708);
-  min-width: 300px;
 }
 
 .usersTable thead {
@@ -770,7 +827,9 @@ dashboard   |
   color: #b5ed9a;
 }
 
-.optionalColumn {
+.optionalColumn,
+.optionalColumnBis,
+.optionalInfo {
   display: none;
 }
 
@@ -781,6 +840,12 @@ dashboard   |
 .usersTable tbody tr:nth-child(even) {
   background-color: #316716;
   color: #b5ed9a;
+}
+
+@media screen and (min-width: 300px) {
+  .optionalInfo {
+    display: revert;
+  }
 }
 
 @media screen and (min-width: 700px) {

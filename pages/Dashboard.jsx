@@ -166,9 +166,9 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             <tr>
               <th>prénom</th>
               <th>nom</th>
-              <th>téléphone</th>
+              <th className='optionalInfo'>téléphone</th>
               <th className='optionalColumn'>adresse électronique</th>
-              <th>rôle</th>
+              <th className='optionalColumnBis'>rôle</th>
               <th>actions</th>
             </tr>
           </thead>
@@ -187,9 +187,9 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 <tr key={id}>
                   <td>{firstname}</td>
                   <td>{lastname}</td>
-                  <td>{mobile}</td>
+                  <td className='optionalInfo'>{mobile}</td>
                   <td className='optionalColumn'>{email} </td>
-                  <td>{name}</td>
+                  <td className='optionalColumnBis'>{name}</td>
                   <td>
                     <button
                       onClick={() => deleteUser(id)}
@@ -229,7 +229,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 </div>
               );
             })}
-            {/* <form className='formEntire'>
+            <form className='formEntire'>
               <input
                 type='text'
                 value={plantToEdit.name}
@@ -238,9 +238,9 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
               <input
                 type='date'
                 className='formInput'
-                defaultValue={plantToEdit.plantation_date_start}
+                defaultValue={plantToEdit.plantation_date_start.slice(0, 10)}
               />
-            </form> */}
+            </form>
             <form action='' className='addPlantForm'></form>
           </div>
         </section>

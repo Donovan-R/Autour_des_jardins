@@ -50,17 +50,19 @@ const Plantations = () => {
       </div>
       <div className='plantsTab'>
         {newTab
-          .filter((plant) => plant.name.includes(search))
+          .filter((plant) =>
+            plant.name.toLowerCase().includes(search.toLowerCase())
+          )
           .map((plant) => (
             <PlantsList plant={plant} key={plant.plant_id} />
           ))}
       </div>
 
-      <Link to='/'>
+      {/* <Link to='/'>
         <span className='backHome'>
           <GiBirdHouse />
         </span>
-      </Link>
+      </Link> */}
 
       <span className='goUp'>
         <a href='#'>

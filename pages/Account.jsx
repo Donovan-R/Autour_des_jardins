@@ -181,7 +181,7 @@ const Account = ({ alert, showAlert, token }) => {
                   }
                 />
               </div>
-              <div>
+              <div className='formRow'>
                 <button onClick={handleSubmit}>modifier</button>
               </div>
             </fieldset>
@@ -189,27 +189,35 @@ const Account = ({ alert, showAlert, token }) => {
           <form className='formContainer' onSubmit={changePassword}>
             <fieldset>
               <legend>changer mon mot de passe</legend>
-              <label htmlFor='originalPassword'>
-                saisissez votre mot de passe actuel
-              </label>
-              <input
-                className='formRow'
-                type='password'
-                name='originalPassword'
-                value={originalPassword}
-                onChange={(e) => setOriginalPassword(e.target.value)}
-              />
+              <div className='formRow'>
+                {' '}
+                <label htmlFor='originalPassword'>
+                  saisissez votre mot de passe actuel
+                </label>
+                <input
+                  type='password'
+                  name='originalPassword'
+                  value={originalPassword}
+                  onChange={(e) => setOriginalPassword(e.target.value)}
+                />
+              </div>
+
               <br />
-              <label htmlFor='newPassword'>
-                saisissez votre nouveau mot de passe
-              </label>
-              <input
-                className='formRow'
-                type='password'
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <button>changer de mot de passe</button>
+              <div className='formRow'>
+                {' '}
+                <label htmlFor='newPassword'>
+                  saisissez votre nouveau mot de passe
+                </label>
+                <input
+                  className='formRow'
+                  type='password'
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+              <div className='formRow'>
+                <button>changer de mot de passe</button>
+              </div>
             </fieldset>
           </form>
           <button

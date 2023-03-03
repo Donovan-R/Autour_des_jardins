@@ -62,11 +62,11 @@ const Plantations = () => {
         </span>
       </Link>
 
-      <div className='goUp'>
+      <span className='goUp'>
         <a href='#'>
           <FaRegPaperPlane />
         </a>
-      </div>
+      </span>
     </section>
   );
 };

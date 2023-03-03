@@ -16,7 +16,7 @@ const Account = ({ alert, showAlert, token }) => {
     id: '',
   });
   const [loading, setLoading] = useState(true);
-  const url = 'http://localhost:5000/api/v1/account/';
+  const url = `${import.meta.env.VITE_URL}/account/`;
 
   const navigate = useNavigate();
 

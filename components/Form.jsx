@@ -58,8 +58,9 @@ const Form = ({ alert, showAlert }) => {
       </div>
       <div className='formContainer'>
         <form action='' onSubmit={handleSubmit}>
+          <h3>Les champs suivis d'une * sont obligatoires</h3>
           <div className='formRow'>
-            <label htmlFor='lastname'>Nom</label>
+            <label htmlFor='lastname'>Nom *</label>
             <input
               type='text'
               className='formInput'
@@ -70,7 +71,7 @@ const Form = ({ alert, showAlert }) => {
             />
           </div>
           <div className='formRow'>
-            <label htmlFor='firstname'>Prénom</label>
+            <label htmlFor='firstname'>Prénom *</label>
             <input
               type='text'
               className='formInput'
@@ -81,7 +82,7 @@ const Form = ({ alert, showAlert }) => {
             />
           </div>
           <div className='formRow'>
-            <label htmlFor='mobile'>Téléphone</label>
+            <label htmlFor='mobile'>Téléphone *</label>
             <input
               type='tel'
               className='formInput'
@@ -92,7 +93,7 @@ const Form = ({ alert, showAlert }) => {
             />
           </div>
           <div className='formRow'>
-            <label htmlFor='email'>email</label>
+            <label htmlFor='email'>Adresse électronique *</label>
             <input
               type='email'
               className='formInput'
@@ -105,7 +106,7 @@ const Form = ({ alert, showAlert }) => {
           <div className='formRow'></div>
 
           <div className='formRow'>
-            <label htmlFor='password'>mot de passe</label>
+            <label htmlFor='password'>Mot de passe *</label>
             <input
               type='password'
               name='password'
@@ -116,7 +117,7 @@ const Form = ({ alert, showAlert }) => {
           </div>
           <div className='formRow justificatifRow'>
             <label htmlFor='justificatif'>
-              joindre un justificatif de domicile (PDF ou image)
+              Joindre un justificatif de domicile * (PDF ou image)
             </label>
             <input
               className='justificatifInput'
@@ -126,7 +127,7 @@ const Form = ({ alert, showAlert }) => {
             />
           </div>
           <div className='formRow'>
-            <label htmlFor='comment'>commentaires</label>
+            <label htmlFor='comment'>Commentaires</label>
             <textarea
               type='textarea'
               name='comments'
@@ -146,7 +147,7 @@ const Form = ({ alert, showAlert }) => {
                   value={user.agree}
                 />
                 <label htmlFor='agree'>
-                  En cochant cette case <b> j'accepte </b> le règlement
+                  En cochant cette case <b> j'accepte </b> le règlement *
                 </label>
               </div>
               <button disabled={!user.agree} className='btn'>

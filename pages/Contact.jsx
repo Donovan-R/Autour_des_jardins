@@ -23,11 +23,11 @@ const Contact = ({ alert, showAlert, setToken }) => {
         <Form alert={alert} showAlert={showAlert} setToken={setToken} />
       </div>
 
-      {/* <Link to='/'>
+      <Link to='/'>
         <span className='backHome'>
           <GiBirdHouse />
         </span>
-      </Link> */}
+      </Link>
       <div className='goUp'>
         <a href='#'>
           <FaRegPaperPlane />

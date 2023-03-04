@@ -687,7 +687,6 @@ plants              |
 .detailsBtn {
   align-self: center;
   padding: 0.5rem;
-  margin-left: 0.5rem;
   background-color: #222;
   color: var(--clr-green-light);
   border: solid 2px var(--clr-green-light);

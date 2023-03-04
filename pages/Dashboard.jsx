@@ -25,6 +25,8 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   const [plantToEdit, setPlantToEdit] = useState({
     name: '',
     plantation_date_start: '',
+    crop: '',
+    plant_id: '',
   });
 
   let newUsers = [...users];
@@ -138,12 +140,30 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       setPlantToEdit({
         name: plant.name,
         plantation_date_start: plant.plantation_date_start,
+        crop: plant.crop,
+        plant_id: plant.plant_id,
       });
       console.log(plantToEdit);
     } catch (error) {
       console.log(error.response);
       showAlert(error.response.data.msg, 'danger', true);
     }
+  };
+
+  const editPlant = async (e) => {
+    const id = plantToEdit.plant_id;
+    e.preventDefault();
+    try {
+      axios.put(`${urlPlants}${id}`, { plantToEdit });
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
+    setPlantToEdit({
+      name: '',
+      plantation_date_start: '',
+      crop: '',
+      plant_id: '',
+    });
   };
 
   return (
@@ -232,14 +252,32 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             <form className='formEntire'>
               <input
                 type='text'
+                name='plantName'
                 value={plantToEdit.name}
                 className='formInput'
+                onChange={(e) =>
+                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
+                }
               />
               <input
                 type='date'
+                name='plantstart'
                 className='formInput'
                 defaultValue={plantToEdit.plantation_date_start.slice(0, 10)}
+                onChange={(e) =>
+                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
+                }
               />
+              <input
+                type='text'
+                className='formInput'
+                name='crop'
+                value={plantToEdit.crop}
+                onChange={(e) =>
+                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
+                }
+              />
+              <button onClick={editPlant}>modifier le plant</button>
             </form>
             <form action='' className='addPlantForm'></form>
           </div>

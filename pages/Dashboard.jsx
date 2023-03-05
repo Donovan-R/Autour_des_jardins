@@ -28,6 +28,12 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     crop: '',
     plant_id: '',
   });
+  const [newPlant, setNewPlant] = useState({
+    name: '',
+    main_img: '',
+    img_inter: '',
+    img_plant: '',
+  });
 
   let newUsers = [...users];
 
@@ -137,13 +143,12 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      setPlantToEdit({
-        name: plant.name,
-        plantation_date_start: plant.plantation_date_start,
-        crop: plant.crop,
-        plant_id: plant.plant_id,
-      });
-      console.log(plantToEdit);
+      // setPlantToEdit({
+      //   name: plant.name,
+      //   plantation_date_start: plant.plantation_date_start,
+      //   crop: plant.crop,
+      //   plant_id: plant.plant_id,
+      // });
     } catch (error) {
       console.log(error.response);
       showAlert(error.response.data.msg, 'danger', true);
@@ -164,6 +169,15 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       crop: '',
       plant_id: '',
     });
+  };
+
+  const addPlant = async (e) => {
+    e.preventDefault();
+    try {
+      axios.post(urlPlants, { newPlant });
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
   };
 
   return (
@@ -249,7 +263,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 </div>
               );
             })}
-            <form className='formEntire'>
+            <form className='formEntire editPlantForm'>
               <input
                 type='text'
                 name='plantName'
@@ -279,7 +293,49 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
               />
               <button onClick={editPlant}>modifier le plant</button>
             </form>
-            <form action='' className='addPlantForm'></form>
+            <form action='' className='formEntire addPlantForm'>
+              <label htmlFor='newPlantName'>nom</label>
+              <input
+                type='text'
+                name='newPlantName'
+                value={newPlant.name}
+                className='formInput'
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, name: e.target.value })
+                }
+              />
+              <label htmlFor='mainImage'>Image principale</label>
+              <input
+                type='text'
+                name='mainImage'
+                value={newPlant.main_img}
+                className='formInput'
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, main_img: e.target.value })
+                }
+              />
+              <label htmlFor='plantImage'>Image du plant bébé</label>
+              <input
+                type='text'
+                name='plantImage'
+                value={newPlant.img_plant}
+                className='formInput'
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, img_plant: e.target.value })
+                }
+              />
+              <label htmlFor='interImage'>Image intermédiaire</label>
+              <input
+                type='text'
+                name='interImage'
+                value={newPlant.img_inter}
+                className='formInput'
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, img_inter: e.target.value })
+                }
+              />
+              <button onClick={addPlant}>créer le plant</button>
+            </form>
           </div>
         </section>
       )}

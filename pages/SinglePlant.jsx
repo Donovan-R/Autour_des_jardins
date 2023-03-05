@@ -23,6 +23,7 @@ const SinglePlant = () => {
           plants_ennemies: plants_ennemies_name,
         },
       } = await axios.get(`${url}${id}`);
+      console.log(plant);
       setPlantDetails(plant);
       if (sowing_inside) {
         setSowingInside(sowing_inside);
@@ -51,6 +52,8 @@ const SinglePlant = () => {
     main_img,
     img_inter,
     img_plant,
+    harvest_date_start,
+    harvest_date_end,
     plantation_date_start,
     plantation_date_end,
     plantation_details,
@@ -104,12 +107,15 @@ const SinglePlant = () => {
         <div className='plantsDetails'>
           <div className='semisDetails'>
             {sowing_date_start_inside && (
-              <h3>
-                {' '}
-                Les semis se font sous abri du {
-                  sowing_date_start_inside
-                } au {sowing_date_end_inside}
-              </h3>
+              <>
+                <h3> Semis</h3>
+                <p>
+                  {' '}
+                  Les semis se font sous abri du {
+                    sowing_date_start_inside
+                  } au {sowing_date_end_inside}
+                </p>
+              </>
             )}
             {sowing_date_start_outside && (
               <h3>
@@ -121,12 +127,13 @@ const SinglePlant = () => {
             <p>{sowing_details}</p>
           </div>
           <div className='plantationDetails'>
-            <h3>
-              La plantation se fait du {plantation_date_start} au
+            <h3>Plantation</h3>
+            <p>
+              La plantation se fait du {plantation_date_start} au{' '}
               {plantation_date_end}
-            </h3>
+            </p>
             <p>{plantation_details}</p>
-            <table>
+            <table className='spacingDetails'>
               <thead>
                 <tr>
                   <th>espace conseillé</th>
@@ -144,6 +151,12 @@ const SinglePlant = () => {
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div className='harvestPlant'>
+            <h3>Récolte</h3>
+            <p>
+              La récolte se fera du {harvest_date_start} au {harvest_date_end}
+            </p>
           </div>
           <div className='culturePlant'>
             <h3>Conseils pour la culture :</h3>

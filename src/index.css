@@ -361,13 +361,19 @@ Form           |
 }
 
 .contactTitle {
+  width: 90vw;
   background-color: rgba(255, 255, 255, 0.7);
   color: var(--clr-green-dark);
-  width: 75vw;
   text-align: center;
   display: grid;
   place-items: center;
   border: solid 2px var(--clr-green-light);
+}
+
+@media screen and(min-width: 350px) {
+  .contactTitle {
+    width: 75vw;
+  }
 }
 
 .underlineContact {

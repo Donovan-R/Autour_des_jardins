@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { GiArtilleryShell, GiBirdHouse } from 'react-icons/gi';
+import Loading from '../components/Loading';
 import axios from 'axios';
 import PlantsList from '../components/PlantsList';
 
@@ -31,9 +32,7 @@ const Plantations = () => {
   if (isLoading) {
     return (
       <section className='plantsSection'>
-        <div>
-          <h2>chargement en cours</h2>
-        </div>
+        <Loading />
       </section>
     );
   }

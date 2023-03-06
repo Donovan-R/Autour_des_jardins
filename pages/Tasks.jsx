@@ -3,7 +3,7 @@ import TasksList from '../components/TasksList';
 import { Link } from 'react-router-dom';
 import Alert from '../components/Alert';
 import axios from 'axios';
-import { FaExclamationTriangle } from 'react-icons/fa';
+import Loading from '../components/Loading';
 
 const Tasks = ({ alert, showAlert, user }) => {
   const [tasks, setTasks] = useState([]);
@@ -11,6 +11,7 @@ const Tasks = ({ alert, showAlert, user }) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem('token');
   const url = `${import.meta.env.VITE_URL}/tasks/`;
   const inputRef = useRef(null);
@@ -28,6 +29,7 @@ const Tasks = ({ alert, showAlert, user }) => {
           authorization: `Bearer ${token}`,
         },
       });
+      setIsLoading(false);
       setTasks(data.tasks);
     } catch (error) {
       console.log(error);

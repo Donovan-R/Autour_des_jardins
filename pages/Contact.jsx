@@ -16,8 +16,10 @@ const Contact = ({ alert, showAlert, setToken }) => {
       </h4>
       <p>
         Avant tout, consultez le règlement intérieur de l'association{' '}
-        <a href={reglement}>ici</a> (vous devrez l'accepter pour finaliser votre
-        inscription)
+        <a href={reglement} target='blank'>
+          ici
+        </a>{' '}
+        (vous devrez l'accepter pour finaliser votre inscription)
       </p>
       <div className='formEntire'>
         <Form alert={alert} showAlert={showAlert} setToken={setToken} />

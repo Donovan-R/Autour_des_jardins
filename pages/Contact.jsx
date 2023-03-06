@@ -8,19 +8,22 @@ import { GiBirdHouse } from 'react-icons/gi';
 const Contact = ({ alert, showAlert, setToken }) => {
   return (
     <section className='contactSection'>
-      <h2>Contact</h2>
-      <h4>
-        Prêt à cultiver votre jardin? Remplissez le formulaire ci-dessous pour
-        vous inscrire dans notre liste d'attente. Nous vous recontacterons pour
-        savoir si vous êtes toujours intéressé, le moment venu.
-      </h4>
-      <p>
-        Avant tout, consultez le règlement intérieur de l'association{' '}
-        <a href={reglement} target='blank'>
-          ici
-        </a>{' '}
-        (vous devrez l'accepter pour finaliser votre inscription)
-      </p>
+      <div className='contactTitle'>
+        <h2>Contact</h2>
+        <div className='underlineContact'></div>
+        <h4>
+          Prêt à cultiver votre jardin? Remplissez le formulaire ci-dessous pour
+          vous inscrire dans notre liste d'attente. Nous vous recontacterons
+          pour savoir si vous êtes toujours intéressé, le moment venu.
+        </h4>
+        <p>
+          Avant tout, consultez le règlement intérieur de l'association{' '}
+          <a href={reglement} target='blank'>
+            ici
+          </a>{' '}
+          (vous devrez l'accepter pour finaliser votre inscription)
+        </p>
+      </div>
       <div className='formEntire'>
         <Form alert={alert} showAlert={showAlert} setToken={setToken} />
       </div>

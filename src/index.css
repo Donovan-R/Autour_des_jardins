@@ -351,17 +351,29 @@ Form           |
 */
 
 .contactSection {
-  background-image: url('https://images.pexels.com/photos/612338/pexels-photo-612338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-image: url('../assets/potagerContact.webp');
   padding: 1rem;
+  display: grid;
+  place-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.contactTitle {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--clr-green-dark);
+  width: 75vw;
+  text-align: center;
   display: grid;
   place-items: center;
 }
 
-.contactSection h4,
-.contactSection p {
-  color: var(--clr-green-deep-dark);
-  width: 75vw;
-  text-align: center;
+.underlineContact {
+  height: 8px;
+  background-color: rgba(33, 111, 45, 0.5);
+  width: 60%;
+  margin: 1rem;
 }
 
 .formEntire {

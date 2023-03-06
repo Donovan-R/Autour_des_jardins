@@ -50,6 +50,7 @@ const Navbar = ({ token, setToken, user }) => {
                         className={({ isActive }) =>
                           isActive ? 'activeLink' : ''
                         }
+                        onClick={() => setIsOpen(false)}
                       >
                         {text}
                       </NavLink>
@@ -68,6 +69,7 @@ const Navbar = ({ token, setToken, user }) => {
                         className={({ isActive }) =>
                           isActive ? 'activeLink' : ''
                         }
+                        onClick={() => setIsOpen(false)}
                       >
                         {text}
                       </NavLink>
@@ -81,6 +83,7 @@ const Navbar = ({ token, setToken, user }) => {
                       className={({ isActive }) =>
                         isActive ? 'activeLink' : ''
                       }
+                      onClick={() => setIsOpen(false)}
                     >
                       Espace admin
                     </NavLink>

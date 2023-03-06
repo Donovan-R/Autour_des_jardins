@@ -47,6 +47,7 @@ Variables      |
   --maxWidth: 40rem;
   --fullWidth: 1170px;
   --fixed-width: 620px;
+  --vh: 100vh;
 }
 
 /*
@@ -69,6 +70,10 @@ body {
   color: var(--clr-green-deepDark);
   line-height: 1.5;
   font-size: 0.875rem;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 ul {
   list-style-type: none;
@@ -596,7 +601,7 @@ plants              |
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: calc(100dvh - 148px);
+  min-height: calc(100vh - 148px);
   overflow: hidden;
 }
 

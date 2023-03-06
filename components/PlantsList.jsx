@@ -24,8 +24,8 @@ const PlantsList = ({ plant }) => {
           <b>Récolte</b> à partir du : {harvest_date_start}
         </h4>
         <div className='detailsBtnContainer'>
-          <Link to={`/plantations/${plant_id}`} className='detailsBtn'>
-            détails
+          <Link to={`/plantations/${plant_id}`}>
+            <button className='detailsBtn'>détails</button>
           </Link>
         </div>
       </div>

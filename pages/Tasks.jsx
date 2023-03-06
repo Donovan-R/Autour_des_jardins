@@ -5,6 +5,13 @@ import Alert from '../components/Alert';
 import axios from 'axios';
 import Loading from '../components/Loading';
 
+const appHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+window.addEventListener('resize', appHeight);
+appHeight();
+
 const Tasks = ({ alert, showAlert, user }) => {
   const [tasks, setTasks] = useState([]);
   const [taskAdded, setTaskAdded] = useState('');

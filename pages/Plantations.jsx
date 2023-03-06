@@ -29,6 +29,10 @@ const Plantations = () => {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
+
+  const filterPlantTab = newTab.filter((plant) =>
+    plant.name.toLowerCase().includes(search.toLowerCase())
+  );
   if (isLoading) {
     return (
       <section className='plantsSection'>
@@ -48,20 +52,20 @@ const Plantations = () => {
         />
       </div>
       <div className='plantsTab'>
-        {newTab
-          .filter((plant) =>
-            plant.name.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((plant) => (
+        {filterPlantTab.length >= 1 ? (
+          filterPlantTab.map((plant) => (
             <PlantsList plant={plant} key={plant.plant_id} />
-          ))}
+          ))
+        ) : (
+          <h2>pas de résultat</h2>
+        )}
       </div>
 
-      {/* <Link to='/'>
+      <Link to='/'>
         <span className='backHome'>
           <GiBirdHouse />
         </span>
-      </Link> */}
+      </Link>
 
       <span className='goUp'>
         <a href='#'>

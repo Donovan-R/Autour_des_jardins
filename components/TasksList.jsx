@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
-
 import { GrCheckbox, GrCheckboxSelected, GrTrash } from 'react-icons/gr';
 
 const TasksList = ({ tasks, deleteTask, editTask, checkTask }) => {

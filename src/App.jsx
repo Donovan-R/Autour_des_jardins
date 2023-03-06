@@ -25,16 +25,14 @@ const getUser = () => {
     : '';
 };
 
-const appHeight = () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-};
-
 const App = () => {
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
   const [token, setToken] = useState(getToken());
   const [user, setUser] = useState(getUser());
-
+  const appHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
   useEffect(() => {
     appHeight();
     window.addEventListener('resize', appHeight);

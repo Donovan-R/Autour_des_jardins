@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavShared from '../pages/NavShared';
 import Home from '../pages/Home';
@@ -29,13 +29,20 @@ const appHeight = () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
-window.addEventListener('resize', appHeight);
-appHeight();
 
 const App = () => {
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
   const [token, setToken] = useState(getToken());
   const [user, setUser] = useState(getUser());
+
+  useEffect(() => {
+    appHeight();
+    window.addEventListener('resize', appHeight);
+
+    return () => {
+      window.removeEventListener('resize', appHeight);
+    };
+  }, []);
 
   const showAlert = (msg = '', type = '', show = false) => {
     setAlert({

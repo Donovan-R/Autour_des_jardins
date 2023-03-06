@@ -377,6 +377,14 @@ Form           |
   margin-bottom: 1rem;
 }
 
+.mailPotager {
+  margin-bottom: 0.5rem;
+}
+
+.mailPotager a {
+  color: var(--clr-green-dark);
+}
+
 .formEntire {
   display: grid;
   place-items: center;

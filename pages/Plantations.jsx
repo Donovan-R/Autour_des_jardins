@@ -14,6 +14,7 @@ const Plantations = () => {
   let newTab = [...plantationsTab];
 
   const getAllPlants = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(url);
       setPlantationsTab(data.plants);

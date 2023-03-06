@@ -393,6 +393,7 @@ Form           |
   width: 90%;
   display: grid;
   place-items: center;
+  margin: 0;
 }
 .formContainer {
   border: solid 2px var(--clr-green-dark);

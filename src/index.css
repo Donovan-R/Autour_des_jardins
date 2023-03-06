@@ -401,7 +401,7 @@ Form           |
   background-color: var(--clr-green-light);
   color: var(--clr-green-dark);
   max-width: 600px;
-  width: 90%;
+  width: 100%;
   margin: 1rem;
 }
 

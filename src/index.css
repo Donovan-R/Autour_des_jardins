@@ -367,13 +367,14 @@ Form           |
   text-align: center;
   display: grid;
   place-items: center;
+  border: solid 2px var(--clr-green-light);
 }
 
 .underlineContact {
   height: 8px;
   background-color: rgba(33, 111, 45, 0.5);
   width: 60%;
-  margin: 1rem;
+  margin-bottom: 1rem;
 }
 
 .formEntire {

@@ -70,6 +70,7 @@ body {
   color: var(--clr-green-deepDark);
   line-height: 1.5;
   font-size: 0.875rem;
+  min-height: -webkit-fill-available;
 }
 ul {
   list-style-type: none;
@@ -598,7 +599,8 @@ plants              |
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100 - 148px);
+  /* min-height: calc(var(--vh, 1vh) * 100 - 148px); */
+  min-height: -webkit-fill-available;
 }
 
 .plantsSection h2 {

@@ -1040,6 +1040,10 @@ dashboard   |
   display: none;
 }
 
+.addPlantForm {
+  background-color: #33ff55;
+}
+
 /*
 =============
 alert        |

@@ -11,7 +11,6 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   const [plantationsTab, setPlantationsTab] = useState([]);
   let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState({
     lastname: '',
@@ -24,15 +23,47 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   });
   const [plantToEdit, setPlantToEdit] = useState({
     name: '',
+    main_img: '',
+    img_inter: '',
+    img_plant: '',
+    harvest_date_start: '',
+    harvest_date_end: '',
     plantation_date_start: '',
+    plantation_date_end: '',
+    plantation_details: '',
+    sowing_details: '',
     crop: '',
-    plant_id: '',
+    crop_rotation: '',
+    rows_spacing_in_cm: '',
+    plants_spacing_in_cm: '',
+    sowing_date_start_inside: '',
+    sowing_date_end_inside: '',
+    sowing_date_start_outside: '',
+    sowing_date_end_outside: '',
+    plants_friends_name: '',
+    plants_ennemies_name: '',
   });
   const [newPlant, setNewPlant] = useState({
     name: '',
     main_img: '',
     img_inter: '',
     img_plant: '',
+    harvest_date_start: '',
+    harvest_date_end: '',
+    plantation_date_start: '',
+    plantation_date_end: '',
+    plantation_details: '',
+    sowing_details: '',
+    crop: '',
+    crop_rotation: '',
+    rows_spacing_in_cm: '',
+    plants_spacing_in_cm: '',
+    sowing_date_start_inside: '',
+    sowing_date_end_inside: '',
+    sowing_date_start_outside: '',
+    sowing_date_end_outside: '',
+    plants_friends_name: '',
+    plants_ennemies_name: '',
   });
 
   let newUsers = [...users];
@@ -44,12 +75,11 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      setLoading(false);
       setUsers(data.data);
       // setNewUserInfos(userInfos);
     } catch (error) {
-      console.log(error.response.data);
-      showAlert(error.reponse.data.msg, 'danger', true);
+      console.log(error);
+      showAlert('impossible', 'danger', true);
     }
   };
 
@@ -143,12 +173,12 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      // setPlantToEdit({
-      //   name: plant.name,
-      //   plantation_date_start: plant.plantation_date_start,
-      //   crop: plant.crop,
-      //   plant_id: plant.plant_id,
-      // });
+      setPlantToEdit({
+        name: plant.name,
+        plantation_date_start: plant.plantation_date_start || '',
+        crop: plant.crop,
+        plant_id: plant.plant_id,
+      });
     } catch (error) {
       console.log(error.response);
       showAlert(error.response.data.msg, 'danger', true);
@@ -165,9 +195,25 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     }
     setPlantToEdit({
       name: '',
+      main_img: '',
+      img_inter: '',
+      img_plant: '',
+      harvest_date_start: '',
+      harvest_date_end: '',
       plantation_date_start: '',
+      plantation_date_end: '',
+      plantation_details: '',
+      sowing_details: '',
       crop: '',
-      plant_id: '',
+      crop_rotation: '',
+      rows_spacing_in_cm: '',
+      plants_spacing_in_cm: '',
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
+      plants_friends_name: '',
+      plants_ennemies_name: '',
     });
   };
 
@@ -178,6 +224,28 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     } catch (error) {
       console.log(error.response.data.msg);
     }
+    setNewPlant({
+      name: '',
+      main_img: '',
+      img_inter: '',
+      img_plant: '',
+      harvest_date_start: '',
+      harvest_date_end: '',
+      plantation_date_start: '',
+      plantation_date_end: '',
+      plantation_details: '',
+      sowing_details: '',
+      crop: '',
+      crop_rotation: '',
+      rows_spacing_in_cm: '',
+      plants_spacing_in_cm: '',
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
+      plants_friends_name: '',
+      plants_ennemies_name: '',
+    });
   };
 
   return (
@@ -263,37 +331,42 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 </div>
               );
             })}
-            <form className='formEntire editPlantForm'>
-              <input
-                type='text'
-                name='plantName'
-                value={plantToEdit.name}
-                className='formInput'
-                onChange={(e) =>
-                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
-                }
-              />
-              <input
-                type='date'
-                name='plantstart'
-                className='formInput'
-                defaultValue={plantToEdit.plantation_date_start.slice(0, 10)}
-                onChange={(e) =>
-                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
-                }
-              />
-              <input
-                type='text'
-                className='formInput'
-                name='crop'
-                value={plantToEdit.crop}
-                onChange={(e) =>
-                  setPlantToEdit({ ...plantToEdit, crop: e.target.value })
-                }
-              />
-              <button onClick={editPlant}>modifier le plant</button>
-            </form>
-            <form action='' className='formEntire addPlantForm'>
+          </div>
+          <form className='formEntire editPlantForm'>
+            <input
+              type='text'
+              name='plantName'
+              value={plantToEdit.name}
+              className='formInput'
+              onChange={(e) =>
+                setPlantToEdit({ ...plantToEdit, name: e.target.value })
+              }
+            />
+            <input
+              type='date'
+              name='plantstart'
+              className='formInput'
+              defaultValue={plantToEdit.plantation_date_start.slice(0, 10)}
+              onChange={(e) =>
+                setPlantToEdit({
+                  ...plantToEdit,
+                  plantation_date_start: e.target.value,
+                })
+              }
+            />
+            <input
+              type='text'
+              className='formInput'
+              name='crop'
+              value={plantToEdit.crop}
+              onChange={(e) =>
+                setPlantToEdit({ ...plantToEdit, crop: e.target.value })
+              }
+            />
+            <button onClick={editPlant}>modifier le plant</button>
+          </form>
+          <form action='' className='formEntire addPlantForm'>
+            <div className='formRow'>
               <label htmlFor='newPlantName'>nom</label>
               <input
                 type='text'
@@ -304,6 +377,8 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                   setNewPlant({ ...newPlant, name: e.target.value })
                 }
               />
+            </div>
+            <div className='formRow'>
               <label htmlFor='mainImage'>Image principale</label>
               <input
                 type='text'
@@ -314,6 +389,8 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                   setNewPlant({ ...newPlant, main_img: e.target.value })
                 }
               />
+            </div>
+            <div className='formRow'>
               <label htmlFor='plantImage'>Image du plant bébé</label>
               <input
                 type='text'
@@ -324,6 +401,8 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                   setNewPlant({ ...newPlant, img_plant: e.target.value })
                 }
               />
+            </div>
+            <div className='formRow'>
               <label htmlFor='interImage'>Image intermédiaire</label>
               <input
                 type='text'
@@ -334,9 +413,238 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                   setNewPlant({ ...newPlant, img_inter: e.target.value })
                 }
               />
-              <button onClick={addPlant}>créer le plant</button>
-            </form>
-          </div>
+            </div>
+            <div className='formRow'>
+              <label htmlFor='harvest_date_start'>début de récolte</label>
+              <input
+                type='date'
+                name='harvest_date_start'
+                value={newPlant.harvest_date_start}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    harvest_date_start: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='harvest_date_end'>fin de récolte</label>
+              <input
+                type='date'
+                name='harvest_date_end'
+                value={newPlant.harvest_date_end}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    harvest_date_end: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plantation_date_start'>début de plantation</label>
+              <input
+                type='date'
+                name='plantation_date_start'
+                value={newPlant.plantation_date_start}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plantation_date_start: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plantation_date_end'>fin de plantation</label>
+              <input
+                type='date'
+                name='plantation_date_end'
+                value={newPlant.plantation_date_end}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plantation_date_end: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plantation_details'>
+                détails pour la plantation
+              </label>
+              <input
+                type='text'
+                name='plantation_details'
+                value={newPlant.plantation_details}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plantation_details: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='sowing_details'>Détails pour les semis</label>
+              <input
+                type='text'
+                name='sowing_details'
+                value={newPlant.sowing_details}
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, sowing_details: e.target.value })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='crop'>Détails sur la culture</label>
+              <input
+                type='text'
+                name='crop'
+                value={newPlant.crop}
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, crop: e.target.value })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='crop_rotation'>Rotation des cultures</label>
+              <input
+                type='text'
+                name='crop_rotation'
+                value={newPlant.crop_rotation}
+                onChange={(e) =>
+                  setNewPlant({ ...newPlant, crop_rotation: e.target.value })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='rows_spacing_in_cm'>
+                espacement des rangs(cm)
+              </label>
+              <input
+                type='number'
+                name='rows_spacing_in_cm'
+                value={newPlant.rows_spacing_in_cm}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    rows_spacing_in_cm: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plants_spacing_in_cm'>
+                espacement des plants(cm)
+              </label>
+              <input
+                type='number'
+                name='plants_spacing_in_cm'
+                value={newPlant.plants_spacing_in_cm}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plants_spacing_in_cm: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='sowing_date_start_inside'>
+                début des semis sous abri
+              </label>
+              <input
+                type='date'
+                name='sowing_date_start_inside'
+                value={newPlant.sowing_date_start_inside}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    sowing_date_start_inside: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='sowing_date_end_inside'>
+                fin des semis sous abri
+              </label>
+              <input
+                type='date'
+                name='sowing_date_end_inside'
+                value={newPlant.sowing_date_end_inside}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    sowing_date_end_inside: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='sowing_date_start_outside'>
+                début des semis en pleine terre
+              </label>
+              <input
+                type='date'
+                name='sowing_date_start_outside'
+                value={newPlant.sowing_date_start_outside}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    sowing_date_start_outside: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='sowing_date_end_outside'>
+                fin des semis en pleine terre
+              </label>
+              <input
+                type='date'
+                name='sowing_date_end_outside'
+                value={newPlant.sowing_date_end_outside}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    sowing_date_end_outside: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plants_friends_name'>plants amis</label>
+              <input
+                type='text'
+                name='plants_friends_name'
+                value={newPlant.plants_friends_name}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plants_friends_name: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className='formRow'>
+              <label htmlFor='plants_ennemies_name'>plants ennemis</label>
+              <input
+                type='text'
+                name='plants_ennemies_name'
+                value={newPlant.plants_ennemies_name}
+                onChange={(e) =>
+                  setNewPlant({
+                    ...newPlant,
+                    plants_ennemies_name: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <button onClick={addPlant}>créer le plant</button>
+          </form>
         </section>
       )}
       {isFormOpen && (

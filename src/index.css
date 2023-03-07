@@ -567,8 +567,15 @@ to Do page                 |
   background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
+
+@media screen and(min-width:575px) {
+  .toDoSection {
+    background-attachment: fixed;
+  }
+}
+
 .toDoSection h2 {
   color: greenyellow;
   font-weight: 600;

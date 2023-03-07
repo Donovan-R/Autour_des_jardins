@@ -471,7 +471,9 @@ to Do page                 |
 
 .toDoSection {
   min-height: calc(100dvh - 148px);
-  background-color: rgb(93, 15, 15);
+  /* background-color: rgb(93, 15, 15); */
+  background: linear-gradient(#3fa67d, #ebf8e1);
+  padding: 0 0.5rem 1rem 0.5rem;
 }
 
 @media screen and (min-width: 575px) {

@@ -512,11 +512,6 @@ to Do page                 |
   background-color: var(--clr-green-light);
   color: black;
 }
-@media screen and (min-width: 350px) {
-  .formCont {
-    width: 70%;
-  }
-}
 
 .inputToDo button {
   padding: 0.5rem;
@@ -539,7 +534,6 @@ to Do page                 |
   align-items: center;
   gap: 0.5rem;
   flex-direction: column;
-  width: 100%;
 }
 
 .taskCard {

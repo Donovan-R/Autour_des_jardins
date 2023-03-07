@@ -60,7 +60,7 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
           {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         </div>
 
-        <h3>Veuillez vous connecter pour accèder à votre espace</h3>
+        <h3>Veuillez vous identifier pour accèder à votre espace</h3>
         <div className='formContainer'>
           <form action='' onSubmit={handleSubmit}>
             <div className='formRow'>

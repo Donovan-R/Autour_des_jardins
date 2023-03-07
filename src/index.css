@@ -471,9 +471,13 @@ to Do page                 |
 
 .toDoSection {
   min-height: calc(100dvh - 148px);
-  /* background-color: rgb(93, 15, 15); */
-  background: linear-gradient(#3fa67d, #ebf8e1);
-  padding: 0 0.5rem 1rem 0.5rem;
+  background: linear-gradient(
+    0.25turn,
+    #2bc487,
+    rgb(34, 199, 76),
+    var(--clr-green-bcg)
+  );
+  padding-bottom: 1rem;
 }
 
 @media screen and (min-width: 575px) {
@@ -516,6 +520,7 @@ to Do page                 |
 }
 
 .inputToDo button {
+  margin-top: 0.5rem;
   padding: 0.5rem;
   margin-left: 0.5rem;
   background-color: #222;

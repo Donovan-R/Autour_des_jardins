@@ -468,6 +468,26 @@ to Do page                 |
 */
 
 /*To Do*/
+
+.toDoSection {
+  min-height: calc(100dvh - 148px);
+  background-color: rgb(93, 15, 15);
+}
+
+@media screen and (min-width: 575px) {
+  .toDoSection {
+    background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+.toDoSection h2 {
+  color: greenyellow;
+  font-weight: 600;
+}
+
 .formCont {
   display: grid;
   text-align: center;
@@ -560,25 +580,6 @@ to Do page                 |
   background-color: #0b0a0a;
   color: #842029;
   border: solid 1px red;
-}
-
-.toDoSection {
-  min-height: calc(100dvh - 148px);
-  background-color: var(--clr-green-bcg);
-}
-
-@media screen and(min-width:575px) {
-  .toDoSection {
-    background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-}
-
-.toDoSection h2 {
-  color: greenyellow;
-  font-weight: 600;
 }
 
 .editBtn,

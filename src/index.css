@@ -563,15 +563,15 @@ to Do page                 |
 }
 
 .toDoSection {
-  min-height: calc(100vh - 148px);
-  background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  min-height: calc(100dvh - 148px);
+  background-color: var(--clr-green-bcg);
 }
 
 @media screen and(min-width:575px) {
   .toDoSection {
+    background-image: url('https://www.rustica.fr/images/01701-rust-1411641042-l870-h630.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
   }
 }

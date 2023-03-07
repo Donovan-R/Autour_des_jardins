@@ -175,13 +175,12 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       });
       setPlantToEdit({
         name: plant.name,
-        plantation_date_start: plant.plantation_date_start || '',
         crop: plant.crop,
         plant_id: plant.plant_id,
       });
     } catch (error) {
-      console.log(error.response);
-      showAlert(error.response.data.msg, 'danger', true);
+      console.log(error);
+      showAlert(error, 'danger', true);
     }
   };
 
@@ -342,307 +341,354 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 setPlantToEdit({ ...plantToEdit, name: e.target.value })
               }
             />
-            <input
+            {/* <input
               type='date'
               name='plantstart'
               className='formInput'
-              defaultValue={plantToEdit.plantation_date_start.slice(0, 10)}
+              value={
+                plantToEdit.plantation_date_start !== ' '
+                  ? plantToEdit.plantation_date_start.slice(0, 10)
+                  : plantToEdit.plantation_date_start
+              }
               onChange={(e) =>
                 setPlantToEdit({
                   ...plantToEdit,
                   plantation_date_start: e.target.value,
                 })
               }
-            />
+            /> */}
             <input
               type='text'
               className='formInput'
               name='crop'
-              value={plantToEdit.crop}
+              value={plantToEdit.crop === null ? '' : plantToEdit.crop}
               onChange={(e) =>
                 setPlantToEdit({ ...plantToEdit, crop: e.target.value })
               }
             />
             <button onClick={editPlant}>modifier le plant</button>
           </form>
-          <form action='' className='formEntire addPlantForm'>
-            <div className='formRow'>
-              <label htmlFor='newPlantName'>nom</label>
-              <input
-                type='text'
-                name='newPlantName'
-                value={newPlant.name}
-                className='formInput'
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, name: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='mainImage'>Image principale</label>
-              <input
-                type='text'
-                name='mainImage'
-                value={newPlant.main_img}
-                className='formInput'
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, main_img: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plantImage'>Image du plant bébé</label>
-              <input
-                type='text'
-                name='plantImage'
-                value={newPlant.img_plant}
-                className='formInput'
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, img_plant: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='interImage'>Image intermédiaire</label>
-              <input
-                type='text'
-                name='interImage'
-                value={newPlant.img_inter}
-                className='formInput'
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, img_inter: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='harvest_date_start'>début de récolte</label>
-              <input
-                type='date'
-                name='harvest_date_start'
-                value={newPlant.harvest_date_start}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    harvest_date_start: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='harvest_date_end'>fin de récolte</label>
-              <input
-                type='date'
-                name='harvest_date_end'
-                value={newPlant.harvest_date_end}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    harvest_date_end: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plantation_date_start'>début de plantation</label>
-              <input
-                type='date'
-                name='plantation_date_start'
-                value={newPlant.plantation_date_start}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plantation_date_start: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plantation_date_end'>fin de plantation</label>
-              <input
-                type='date'
-                name='plantation_date_end'
-                value={newPlant.plantation_date_end}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plantation_date_end: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plantation_details'>
-                détails pour la plantation
-              </label>
-              <input
-                type='text'
-                name='plantation_details'
-                value={newPlant.plantation_details}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plantation_details: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='sowing_details'>Détails pour les semis</label>
-              <input
-                type='text'
-                name='sowing_details'
-                value={newPlant.sowing_details}
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, sowing_details: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='crop'>Détails sur la culture</label>
-              <input
-                type='text'
-                name='crop'
-                value={newPlant.crop}
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, crop: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='crop_rotation'>Rotation des cultures</label>
-              <input
-                type='text'
-                name='crop_rotation'
-                value={newPlant.crop_rotation}
-                onChange={(e) =>
-                  setNewPlant({ ...newPlant, crop_rotation: e.target.value })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='rows_spacing_in_cm'>
-                espacement des rangs(cm)
-              </label>
-              <input
-                type='number'
-                name='rows_spacing_in_cm'
-                value={newPlant.rows_spacing_in_cm}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    rows_spacing_in_cm: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plants_spacing_in_cm'>
-                espacement des plants(cm)
-              </label>
-              <input
-                type='number'
-                name='plants_spacing_in_cm'
-                value={newPlant.plants_spacing_in_cm}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plants_spacing_in_cm: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='sowing_date_start_inside'>
-                début des semis sous abri
-              </label>
-              <input
-                type='date'
-                name='sowing_date_start_inside'
-                value={newPlant.sowing_date_start_inside}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    sowing_date_start_inside: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='sowing_date_end_inside'>
-                fin des semis sous abri
-              </label>
-              <input
-                type='date'
-                name='sowing_date_end_inside'
-                value={newPlant.sowing_date_end_inside}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    sowing_date_end_inside: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='sowing_date_start_outside'>
-                début des semis en pleine terre
-              </label>
-              <input
-                type='date'
-                name='sowing_date_start_outside'
-                value={newPlant.sowing_date_start_outside}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    sowing_date_start_outside: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='sowing_date_end_outside'>
-                fin des semis en pleine terre
-              </label>
-              <input
-                type='date'
-                name='sowing_date_end_outside'
-                value={newPlant.sowing_date_end_outside}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    sowing_date_end_outside: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plants_friends_name'>plants amis</label>
-              <input
-                type='text'
-                name='plants_friends_name'
-                value={newPlant.plants_friends_name}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plants_friends_name: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className='formRow'>
-              <label htmlFor='plants_ennemies_name'>plants ennemis</label>
-              <input
-                type='text'
-                name='plants_ennemies_name'
-                value={newPlant.plants_ennemies_name}
-                onChange={(e) =>
-                  setNewPlant({
-                    ...newPlant,
-                    plants_ennemies_name: e.target.value,
-                  })
-                }
-              />
-            </div>
+          <form className='addPlantForm'>
+            <h2>Ajout d'un plant</h2>
+            <fieldset className='addPlantCategory'>
+              informations générales
+              <div className='addPlantNotNullInfos'>
+                <div className='formRowDashboard'>
+                  <label htmlFor='newPlantName'>nom</label>
+                  <input
+                    type='text'
+                    name='newPlantName'
+                    value={newPlant.name}
+                    className='formInput'
+                    onChange={(e) =>
+                      setNewPlant({ ...newPlant, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className='formRowDashboard'>
+                  <label htmlFor='mainImage'>Image principale</label>
+                  <input
+                    type='text'
+                    name='mainImage'
+                    value={newPlant.main_img}
+                    className='formInput'
+                    onChange={(e) =>
+                      setNewPlant({ ...newPlant, main_img: e.target.value })
+                    }
+                  />
+                </div>
+                <div className='formRowDashboard'>
+                  <label htmlFor='plantImage'>Image du plant bébé</label>
+                  <input
+                    type='text'
+                    name='plantImage'
+                    value={newPlant.img_plant}
+                    className='formInput'
+                    onChange={(e) =>
+                      setNewPlant({ ...newPlant, img_plant: e.target.value })
+                    }
+                  />
+                </div>
+                <div className='formRowDashboard'>
+                  <label htmlFor='interImage'>Image intermédiaire</label>
+                  <input
+                    type='text'
+                    name='interImage'
+                    value={newPlant.img_inter}
+                    className='formInput'
+                    onChange={(e) =>
+                      setNewPlant({ ...newPlant, img_inter: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className='previewImages'>
+                <img
+                  src={newPlant.img_plant}
+                  alt={newPlant.name}
+                  className='previewImage'
+                />
+                <img
+                  src={newPlant.img_inter}
+                  alt={newPlant.name}
+                  className='previewImage'
+                />
+                <img
+                  src={newPlant.main_img}
+                  alt={newPlant.name}
+                  className='previewImage'
+                />
+              </div>
+            </fieldset>
+            <fieldset className='addPlantCategory'>
+              Récolte
+              <div className='formRowDashboard'>
+                <label htmlFor='harvest_date_start'>début de récolte</label>
+                <input
+                  type='date'
+                  name='harvest_date_start'
+                  value={newPlant.harvest_date_start}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      harvest_date_start: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='harvest_date_end'>fin de récolte</label>
+                <input
+                  type='date'
+                  name='harvest_date_end'
+                  value={newPlant.harvest_date_end}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      harvest_date_end: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </fieldset>
+            <fieldset className='addPlantCategory'>
+              {' '}
+              Plantation
+              <div className='formRowDashboard'>
+                <label htmlFor='plantation_date_start'>
+                  début de plantation
+                </label>
+                <input
+                  type='date'
+                  name='plantation_date_start'
+                  value={newPlant.plantation_date_start}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plantation_date_start: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='plantation_date_end'>fin de plantation</label>
+                <input
+                  type='date'
+                  name='plantation_date_end'
+                  value={newPlant.plantation_date_end}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plantation_date_end: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='plantation_details'>
+                  détails pour la plantation
+                </label>
+                <input
+                  type='text'
+                  name='plantation_details'
+                  value={newPlant.plantation_details}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plantation_details: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </fieldset>
+
+            <fieldset className='addPlantCategory'>
+              culture
+              <div className='formRowDashboard'>
+                <label htmlFor='crop'>Détails sur la culture</label>
+                <textarea
+                  type='text'
+                  name='crop'
+                  value={newPlant.crop}
+                  onChange={(e) =>
+                    setNewPlant({ ...newPlant, crop: e.target.value })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='crop_rotation'>Rotation des cultures</label>
+                <input
+                  type='text'
+                  name='crop_rotation'
+                  value={newPlant.crop_rotation}
+                  onChange={(e) =>
+                    setNewPlant({ ...newPlant, crop_rotation: e.target.value })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='rows_spacing_in_cm'>
+                  espacement des rangs(cm)
+                </label>
+                <input
+                  type='number'
+                  name='rows_spacing_in_cm'
+                  value={newPlant.rows_spacing_in_cm}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      rows_spacing_in_cm: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='plants_spacing_in_cm'>
+                  espacement des plants(cm)
+                </label>
+                <input
+                  type='number'
+                  name='plants_spacing_in_cm'
+                  value={newPlant.plants_spacing_in_cm}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plants_spacing_in_cm: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </fieldset>
+            <fieldset className='addPlantCategory'>
+              semis
+              <div className='formRowDashboard'>
+                <label htmlFor='sowing_date_start_inside'>
+                  début des semis sous abri
+                </label>
+                <input
+                  type='date'
+                  name='sowing_date_start_inside'
+                  value={newPlant.sowing_date_start_inside}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      sowing_date_start_inside: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='sowing_date_end_inside'>
+                  fin des semis sous abri
+                </label>
+                <input
+                  type='date'
+                  name='sowing_date_end_inside'
+                  value={newPlant.sowing_date_end_inside}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      sowing_date_end_inside: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='sowing_date_start_outside'>
+                  début des semis en pleine terre
+                </label>
+                <input
+                  type='date'
+                  name='sowing_date_start_outside'
+                  value={newPlant.sowing_date_start_outside}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      sowing_date_start_outside: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='sowing_date_end_outside'>
+                  fin des semis en pleine terre
+                </label>
+                <input
+                  type='date'
+                  name='sowing_date_end_outside'
+                  value={newPlant.sowing_date_end_outside}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      sowing_date_end_outside: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='sowing_details'>Détails pour les semis</label>
+                <input
+                  type='text'
+                  name='sowing_details'
+                  value={newPlant.sowing_details}
+                  onChange={(e) =>
+                    setNewPlant({ ...newPlant, sowing_details: e.target.value })
+                  }
+                />
+              </div>
+            </fieldset>
+
+            <fieldset className='addPlantCategory'>
+              Cohabitation
+              <div className='formRowDashboard'>
+                <label htmlFor='plants_friends_name'>plants amis</label>
+                <input
+                  type='text'
+                  name='plants_friends_name'
+                  value={newPlant.plants_friends_name}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plants_friends_name: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className='formRowDashboard'>
+                <label htmlFor='plants_ennemies_name'>plants ennemis</label>
+                <input
+                  type='text'
+                  name='plants_ennemies_name'
+                  value={newPlant.plants_ennemies_name}
+                  onChange={(e) =>
+                    setNewPlant({
+                      ...newPlant,
+                      plants_ennemies_name: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </fieldset>
             <button onClick={addPlant}>créer le plant</button>
           </form>
         </section>

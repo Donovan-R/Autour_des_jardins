@@ -200,9 +200,9 @@ slider (w100 bootstrap enlevé) |
 }
 
 /*
-================================
-retour haut de page et accueil  |
-================================
+========================================
+retour haut de page et accueil et liens |
+========================================
 */
 
 .goUp {
@@ -224,6 +224,15 @@ retour haut de page et accueil  |
   bottom: 0;
   left: 0;
   margin: 1rem;
+}
+
+.linkPage {
+  color: #33ff55;
+  text-transform: capitalize;
+  font-style: italic;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  text-shadow: 2px 0px 2px rgba(8, 67, 18, 0.6);
 }
 
 /*

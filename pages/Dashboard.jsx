@@ -12,6 +12,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isEditModeActive, setIsEditModeActive] = useState(false);
   const [userToEdit, setUserToEdit] = useState({
     lastname: '',
     firstname: '',
@@ -20,28 +21,6 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     name: '',
     role_id: '',
     user_id: '',
-  });
-  const [plantToEdit, setPlantToEdit] = useState({
-    name: '',
-    main_img: '',
-    img_inter: '',
-    img_plant: '',
-    harvest_date_start: '',
-    harvest_date_end: '',
-    plantation_date_start: '',
-    plantation_date_end: '',
-    plantation_details: '',
-    sowing_details: '',
-    crop: '',
-    crop_rotation: '',
-    rows_spacing_in_cm: '',
-    plants_spacing_in_cm: '',
-    sowing_date_start_inside: '',
-    sowing_date_end_inside: '',
-    sowing_date_start_outside: '',
-    sowing_date_end_outside: '',
-    plants_friends_name: '',
-    plants_ennemies_name: '',
   });
   const [newPlant, setNewPlant] = useState({
     name: '',
@@ -166,18 +145,60 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
 
   const getSinglePlantInfos = async (plant_id) => {
     try {
+      setIsEditModeActive(true);
       const {
-        data: { plant },
+        data: {
+          plant: plant,
+          sowing_inside: sowing_inside,
+          sowing_outside: sowing_outside,
+          plants_friends: plants_friends_name,
+          plants_ennemies: plants_ennemies_name,
+        },
       } = await axios.get(`${url}${plant_id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      setPlantToEdit({
+      console.log(sowing_inside);
+      setNewPlant({
         name: plant.name,
-        crop: plant.crop,
-        plant_id: plant.plant_id,
+        main_img: plant.main_img,
+        img_inter: plant.img_inter,
+        img_plant: plant.img_plant,
+        harvest_date_start: plant.harvest_date_start.slice(0, 10),
+        harvest_date_end: plant.harvest_date_end.slice(0, 10),
+        plantation_date_start: plant.harvest_date_start.slice(0, 10),
+        plantation_date_end: plant.harvest_date_end.slice(0, 10),
+        plantation_details: plant.plantation_details,
+        sowing_details: plant.sowing_details ? plant.sowing_details : '',
+        crop: plant.crop ? plant.corp : '',
+        crop_rotation: plant.crop_rotation ? plant.crop_rotation : '',
+        rows_spacing_in_cm: plant.rows_spacing_in_cm,
+        plants_spacing_in_cm: plant.plants_spacing_in_cm,
+        sowing_date_start_inside:
+          sowing_inside !== undefined
+            ? sowing_inside.sowing_date_start.slice(0, 10)
+            : '',
+        sowing_date_end_inside:
+          sowing_inside !== undefined
+            ? sowing_inside.sowing_date_end.slice(0, 10)
+            : '',
+        sowing_date_start_outside:
+          sowing_outside !== undefined
+            ? sowing_outside.sowing_date_start.slice(0, 10)
+            : '',
+        sowing_date_end_outside:
+          sowing_outside !== undefined
+            ? sowing_outside.sowing_date_end.slice(0, 10)
+            : '',
+        plants_friends_name: plants_friends_name
+          ? plants_friends_name.plants_friends_name
+          : '',
+        plants_ennemies_name: plants_ennemies_name
+          ? plants_ennemies_name.plants_ennemies_name
+          : '',
       });
+      console.log(newPlant);
     } catch (error) {
       console.log(error);
       showAlert(error, 'danger', true);
@@ -185,14 +206,41 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   };
 
   const editPlant = async (e) => {
-    const id = plantToEdit.plant_id;
+    const id = newPlant.plant_id;
     e.preventDefault();
     try {
-      axios.put(`${urlPlants}${id}`, { plantToEdit });
+      axios.put(`${urlPlants}${id}`, { newPlant });
     } catch (error) {
       console.log(error.response.data.msg);
     }
-    setPlantToEdit({
+    setIsEditModeActive(false);
+    setNewPlant({
+      name: '',
+      main_img: '',
+      img_inter: '',
+      img_plant: '',
+      harvest_date_start: '',
+      harvest_date_end: '',
+      plantation_date_start: '',
+      plantation_date_end: '',
+      plantation_details: '',
+      sowing_details: '',
+      crop: '',
+      crop_rotation: '',
+      rows_spacing_in_cm: '',
+      plants_spacing_in_cm: '',
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
+      plants_friends_name: '',
+      plants_ennemies_name: '',
+    });
+  };
+
+  const cancelEdit = () => {
+    setIsEditModeActive(false);
+    setNewPlant({
       name: '',
       main_img: '',
       img_inter: '',
@@ -331,45 +379,14 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
               );
             })}
           </div>
-          <form className='formEntire editPlantForm'>
-            <input
-              type='text'
-              name='plantName'
-              value={plantToEdit.name}
-              className='formInput'
-              onChange={(e) =>
-                setPlantToEdit({ ...plantToEdit, name: e.target.value })
-              }
-            />
-            {/* <input
-              type='date'
-              name='plantstart'
-              className='formInput'
-              value={
-                plantToEdit.plantation_date_start !== ' '
-                  ? plantToEdit.plantation_date_start.slice(0, 10)
-                  : plantToEdit.plantation_date_start
-              }
-              onChange={(e) =>
-                setPlantToEdit({
-                  ...plantToEdit,
-                  plantation_date_start: e.target.value,
-                })
-              }
-            /> */}
-            <input
-              type='text'
-              className='formInput'
-              name='crop'
-              value={plantToEdit.crop === null ? '' : plantToEdit.crop}
-              onChange={(e) =>
-                setPlantToEdit({ ...plantToEdit, crop: e.target.value })
-              }
-            />
-            <button onClick={editPlant}>modifier le plant</button>
-          </form>
+
           <form className='addPlantForm'>
-            <h2>Ajout d'un plant</h2>
+            {isEditModeActive ? (
+              <h2>Modification d'un palnt</h2>
+            ) : (
+              <h2>Ajout d'un plant</h2>
+            )}
+
             <fieldset className='addPlantCategory'>
               informations générales
               <div className='addPlantNotNullInfos'>
@@ -689,7 +706,14 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 />
               </div>
             </fieldset>
-            <button onClick={addPlant}>créer le plant</button>
+            {isEditModeActive ? (
+              <div>
+                <button onClick={editPlant}>modifier le plant</button>
+                <button onClick={cancelEdit}>annuler</button>
+              </div>
+            ) : (
+              <button onClick={addPlant}>créer le plant</button>
+            )}
           </form>
         </section>
       )}

@@ -19,15 +19,21 @@ const Home = () => {
             Ce site vous permettra de mieux connaître l'association et ses
             activités. Il vous offira également la possibilité de vous incrire
             sur notre liste d'attente grâce au formulaire visible sur la page{' '}
-            <Link to={'/Contact'}> nous rejoindre</Link>. Sur cette page, vous
-            trouverez également le mail de l'association pour nous contacter
-            sans vous inscrire (en cliquant sur l'adresse votre messagerie
-            s'ouvrira automatiquement).
+            <Link to={'/Contact'} className='linkPage'>
+              {' '}
+              nous rejoindre
+            </Link>
+            . Sur cette page, vous trouverez également le mail de l'association
+            pour nous contacter sans vous inscrire (en cliquant sur l'adresse
+            votre messagerie s'ouvrira automatiquement).
           </p>
           <p>
             Vous aurez également la possibilité de consulter un calendrier du
-            potager présenté par nom de plant et classé par ordre alphabétique à
-            la page <Link to={'/Plantations'}>plantations</Link>
+            potager présenté par nom de plant et classé par ordre
+            alphabétiquement à la page{' '}
+            <Link to={'/Plantations'} className='linkPage'>
+              plantations
+            </Link>
           </p>
           <p>
             Les insrcrits pourront accèder à un espace personnel dans lequel ils

@@ -12,6 +12,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  // const [plantEditId, setPlantEditId] = useState('');
   const [isEditModeActive, setIsEditModeActive] = useState(false);
   const [userToEdit, setUserToEdit] = useState({
     lastname: '',
@@ -23,6 +24,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     user_id: '',
   });
   const [newPlant, setNewPlant] = useState({
+    plant_id: '',
     name: '',
     main_img: '',
     img_inter: '',
@@ -37,13 +39,19 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     crop_rotation: '',
     rows_spacing_in_cm: '',
     plants_spacing_in_cm: '',
+    // plants_friends_name: '',
+    // plants_ennemies_name: '',
+  });
+  const [sowingInside, setSowingInside] = useState({
     sowing_date_start_inside: '',
     sowing_date_end_inside: '',
+  });
+  const [sowingOutside, setSowingOutside] = useState({
     sowing_date_start_outside: '',
     sowing_date_end_outside: '',
-    plants_friends_name: '',
-    plants_ennemies_name: '',
   });
+  const [plantsFriends, setPlantsFriends] = useState([]);
+  const [plantsEnnemies, setPlantsEnnemies] = useState([]);
 
   let newUsers = [...users];
 
@@ -141,9 +149,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   };
   useEffect(() => {
     getAllPlantsAdmin();
-  }, []);
+  }, [newPlant]);
 
   const getSinglePlantInfos = async (plant_id) => {
+    // setPlantEditId(plant_id);
     try {
       setIsEditModeActive(true);
       const {
@@ -159,45 +168,56 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(sowing_inside);
       setNewPlant({
+        plant_id: plant.plant_id,
         name: plant.name,
         main_img: plant.main_img,
         img_inter: plant.img_inter,
         img_plant: plant.img_plant,
         harvest_date_start: plant.harvest_date_start.slice(0, 10),
         harvest_date_end: plant.harvest_date_end.slice(0, 10),
-        plantation_date_start: plant.harvest_date_start.slice(0, 10),
-        plantation_date_end: plant.harvest_date_end.slice(0, 10),
+        plantation_date_start: plant.plantation_date_start.slice(0, 10),
+        plantation_date_end: plant.plantation_date_end.slice(0, 10),
         plantation_details: plant.plantation_details,
         sowing_details: plant.sowing_details ? plant.sowing_details : '',
-        crop: plant.crop ? plant.corp : '',
+        crop: plant.crop !== undefined ? plant.crop : '',
         crop_rotation: plant.crop_rotation ? plant.crop_rotation : '',
         rows_spacing_in_cm: plant.rows_spacing_in_cm,
         plants_spacing_in_cm: plant.plants_spacing_in_cm,
-        sowing_date_start_inside:
-          sowing_inside !== undefined
+        // sowing_date_start_outside:
+        //   sowing_outside != undefined || sowing_outside.sowing_date_start
+        //     ? sowing_outside.sowing_date_start.slice(0, 10)
+        //     : '',
+        // sowing_date_end_outside:
+        //   sowing_outside !== 'undefined' || sowing_outside.sowing_date_end
+        //     ? sowing_outside.sowing_date_end.slice(0, 10)
+        //     : '',
+        // plants_friends_name: plants_friends_name
+        //   ? plants_friends_name.plants_friends_name
+        //   : '',
+        // plants_ennemies_name: plants_ennemies_name
+        //   ? plants_ennemies_name.plants_ennemies_name
+        //   : '',
+      });
+      sowing_inside &&
+        setSowingInside({
+          sowing_date_start_inside: sowing_inside.sowing_date_start
             ? sowing_inside.sowing_date_start.slice(0, 10)
             : '',
-        sowing_date_end_inside:
-          sowing_inside !== undefined
+          sowing_date_end_inside: sowing_inside.sowing_date_end
             ? sowing_inside.sowing_date_end.slice(0, 10)
             : '',
-        sowing_date_start_outside:
-          sowing_outside !== undefined
+        });
+      sowing_outside &&
+        setSowingOutside({
+          sowing_date_start_outside: sowing_outside.sowing_date_start
             ? sowing_outside.sowing_date_start.slice(0, 10)
             : '',
-        sowing_date_end_outside:
-          sowing_outside !== undefined
+          sowing_date_end_outside: sowing_outside.sowing_date_end
             ? sowing_outside.sowing_date_end.slice(0, 10)
             : '',
-        plants_friends_name: plants_friends_name
-          ? plants_friends_name.plants_friends_name
-          : '',
-        plants_ennemies_name: plants_ennemies_name
-          ? plants_ennemies_name.plants_ennemies_name
-          : '',
-      });
+        });
+
       console.log(newPlant);
     } catch (error) {
       console.log(error);
@@ -205,16 +225,25 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     }
   };
 
+  // useEffect(() => {
+  //   getSinglePlantInfos();
+  // }, []);
+
   const editPlant = async (e) => {
-    const id = newPlant.plant_id;
     e.preventDefault();
+    const editPlantId = newPlant.plant_id;
     try {
-      axios.put(`${urlPlants}${id}`, { newPlant });
+      axios.put(`${urlPlants}${editPlantId}`, {
+        newPlant,
+        sowingInside,
+        sowingOutside,
+      });
     } catch (error) {
       console.log(error.response.data.msg);
     }
     setIsEditModeActive(false);
     setNewPlant({
+      plant_id: '',
       name: '',
       main_img: '',
       img_inter: '',
@@ -229,18 +258,24 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       crop_rotation: '',
       rows_spacing_in_cm: '',
       plants_spacing_in_cm: '',
-      sowing_date_start_inside: '',
-      sowing_date_end_inside: '',
-      sowing_date_start_outside: '',
-      sowing_date_end_outside: '',
       plants_friends_name: '',
       plants_ennemies_name: '',
+    });
+
+    setSowingInside({
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+    });
+    setSowingOutside({
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
     });
   };
 
   const cancelEdit = () => {
     setIsEditModeActive(false);
     setNewPlant({
+      plant_id: '',
       name: '',
       main_img: '',
       img_inter: '',
@@ -255,23 +290,32 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       crop_rotation: '',
       rows_spacing_in_cm: '',
       plants_spacing_in_cm: '',
-      sowing_date_start_inside: '',
-      sowing_date_end_inside: '',
-      sowing_date_start_outside: '',
-      sowing_date_end_outside: '',
       plants_friends_name: '',
       plants_ennemies_name: '',
+    });
+    setSowingInside({
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+    });
+    setSowingOutside({
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
     });
   };
 
   const addPlant = async (e) => {
     e.preventDefault();
     try {
-      axios.post(urlPlants, { newPlant });
+      axios.post(urlPlants, {
+        newPlant,
+        sowingInside,
+        sowingOutside,
+      });
     } catch (error) {
       console.log(error.response.data.msg);
     }
     setNewPlant({
+      plant_id: '',
       name: '',
       main_img: '',
       img_inter: '',
@@ -286,12 +330,16 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
       crop_rotation: '',
       rows_spacing_in_cm: '',
       plants_spacing_in_cm: '',
-      sowing_date_start_inside: '',
-      sowing_date_end_inside: '',
-      sowing_date_start_outside: '',
-      sowing_date_end_outside: '',
       plants_friends_name: '',
       plants_ennemies_name: '',
+    });
+    setSowingInside({
+      sowing_date_start_inside: '',
+      sowing_date_end_inside: '',
+    });
+    setSowingOutside({
+      sowing_date_start_outside: '',
+      sowing_date_end_outside: '',
     });
   };
 
@@ -382,7 +430,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
 
           <form className='addPlantForm'>
             {isEditModeActive ? (
-              <h2>Modification d'un palnt</h2>
+              <h2>Modification d'un plant</h2>
             ) : (
               <h2>Ajout d'un plant</h2>
             )}
@@ -605,10 +653,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 <input
                   type='date'
                   name='sowing_date_start_inside'
-                  value={newPlant.sowing_date_start_inside}
+                  value={sowingInside.sowing_date_start_inside}
                   onChange={(e) =>
-                    setNewPlant({
-                      ...newPlant,
+                    setSowingInside({
+                      ...sowingInside,
                       sowing_date_start_inside: e.target.value,
                     })
                   }
@@ -621,10 +669,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 <input
                   type='date'
                   name='sowing_date_end_inside'
-                  value={newPlant.sowing_date_end_inside}
+                  value={sowingInside.sowing_date_end_inside}
                   onChange={(e) =>
-                    setNewPlant({
-                      ...newPlant,
+                    setSowingInside({
+                      ...sowingInside,
                       sowing_date_end_inside: e.target.value,
                     })
                   }
@@ -637,10 +685,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 <input
                   type='date'
                   name='sowing_date_start_outside'
-                  value={newPlant.sowing_date_start_outside}
+                  value={sowingOutside.sowing_date_start_outside}
                   onChange={(e) =>
-                    setNewPlant({
-                      ...newPlant,
+                    setSowingOutside({
+                      ...sowingOutside,
                       sowing_date_start_outside: e.target.value,
                     })
                   }
@@ -653,10 +701,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 <input
                   type='date'
                   name='sowing_date_end_outside'
-                  value={newPlant.sowing_date_end_outside}
+                  value={sowingOutside.sowing_date_end_outside}
                   onChange={(e) =>
-                    setNewPlant({
-                      ...newPlant,
+                    setSowingOutside({
+                      ...sowingOutside,
                       sowing_date_end_outside: e.target.value,
                     })
                   }
@@ -674,7 +722,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 />
               </div>
             </fieldset>
-
+            {/* 
             <fieldset className='addPlantCategory'>
               Cohabitation
               <div className='formRowDashboard'>
@@ -705,7 +753,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                   }
                 />
               </div>
-            </fieldset>
+            </fieldset> */}
             {isEditModeActive ? (
               <div>
                 <button onClick={editPlant}>modifier le plant</button>
@@ -736,7 +784,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                 setUserToEdit({ ...userToEdit, lastname: e.target.value })
               }
             />
-            <label htmlFor='fistname'>Prénom</label>
+            <label htmlFor='firstname'>Prénom</label>
             <input
               type='text'
               name='firstname'

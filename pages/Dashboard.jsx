@@ -152,7 +152,6 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   }, [newPlant]);
 
   const getSinglePlantInfos = async (plant_id) => {
-    // setPlantEditId(plant_id);
     try {
       setIsEditModeActive(true);
       const {
@@ -184,14 +183,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
         crop_rotation: plant.crop_rotation ? plant.crop_rotation : '',
         rows_spacing_in_cm: plant.rows_spacing_in_cm,
         plants_spacing_in_cm: plant.plants_spacing_in_cm,
-        // sowing_date_start_outside:
-        //   sowing_outside != undefined || sowing_outside.sowing_date_start
-        //     ? sowing_outside.sowing_date_start.slice(0, 10)
-        //     : '',
-        // sowing_date_end_outside:
-        //   sowing_outside !== 'undefined' || sowing_outside.sowing_date_end
-        //     ? sowing_outside.sowing_date_end.slice(0, 10)
-        //     : '',
+
         // plants_friends_name: plants_friends_name
         //   ? plants_friends_name.plants_friends_name
         //   : '',
@@ -217,8 +209,6 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             ? sowing_outside.sowing_date_end.slice(0, 10)
             : '',
         });
-
-      console.log(newPlant);
     } catch (error) {
       console.log(error);
       showAlert(error, 'danger', true);
@@ -343,6 +333,19 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
     });
   };
 
+  const deletePlant = async (plant_id) => {
+    try {
+      setPlantationsTab(
+        plantsTabDashboard.filter((plant) => plant.plant_id !== plant_id)
+      );
+      showAlert('plant supprimé', 'danger', true);
+      await axios.delete(`${urlPlants}${plant_id}`);
+    } catch (error) {
+      console.log(error.response.data);
+      showAlert(error.reponse.data.msg, 'danger', true);
+    }
+  };
+
   return (
     <>
       <section className='dashboardSection'>
@@ -412,17 +415,29 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             {plantsTabDashboard.map((plant) => {
               const { name, main_img, plant_id } = plant;
               return (
-                <div
-                  key={plant_id}
-                  className='plantCardDashboard'
-                  onClick={() => getSinglePlantInfos(plant_id)}
-                >
+                <div key={plant_id} className='plantCardDashboard'>
                   <img
                     src={main_img}
                     alt={name}
                     className='plantPictureDashboard'
                   />
-                  <h4>{name}</h4>
+
+                  <h4>{name} </h4>
+                  <div className='plantCardDashboardBtns'>
+                    <button
+                      className='deleteBtn'
+                      onClick={() => deletePlant(plant_id)}
+                    >
+                      {' '}
+                      <GrTrash />
+                    </button>
+                    <button
+                      className='editBtn'
+                      onClick={() => getSinglePlantInfos(plant_id)}
+                    >
+                      <FaEdit />
+                    </button>
+                  </div>
                 </div>
               );
             })}

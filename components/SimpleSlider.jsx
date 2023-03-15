@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import potager1 from '.././assets/potager1.jpg';
 import potager2 from '.././assets/potager2.jpg';
 import potager3 from '.././assets/potager3.jpg';
+import potager4 from '../assets/potager4.jpg';
+import potager5 from '../assets/potager5.jpg';
+
 import Loading from './Loading';
 
 export const SimpleSlider = () => {
@@ -37,6 +40,20 @@ export const SimpleSlider = () => {
           data-bs-slide-to='2'
           aria-label='Slide 3'
         ></button>
+        <button
+          className='buttonSlider'
+          type='button'
+          data-bs-target='#carouselExampleIndicators'
+          data-bs-slide-to='3'
+          aria-label='Slide 4'
+        ></button>
+        <button
+          className='buttonSlider'
+          type='button'
+          data-bs-target='#carouselExampleIndicators'
+          data-bs-slide-to='4'
+          aria-label='Slide 5'
+        ></button>
       </div>
       <div className='carousel-inner'>
         <div className='carousel-item active'>
@@ -58,6 +75,22 @@ export const SimpleSlider = () => {
         <div className='carousel-item'>
           <img
             src={potager3}
+            className='d-block'
+            alt='vue générale du potager'
+            onLoad={handleLoadingImg}
+          />
+        </div>
+        <div className='carousel-item'>
+          <img
+            src={potager4}
+            className='d-block'
+            alt='vue générale du potager'
+            onLoad={handleLoadingImg}
+          />
+        </div>
+        <div className='carousel-item'>
+          <img
+            src={potager5}
             className='d-block'
             alt='vue générale du potager'
             onLoad={handleLoadingImg}

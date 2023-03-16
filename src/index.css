@@ -1134,6 +1134,12 @@ dashboard   |
   border: solid 2px var(--clr-green-light);
 }
 
+@media screen and (min-width: 350px) {
+  .commentsSection {
+    margin: 1rem;
+  }
+}
+
 .commentsSection p {
   color: var(--clr-green-deepDark);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',

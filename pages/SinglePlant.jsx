@@ -121,10 +121,12 @@ const SinglePlant = () => {
           </div>
           <div className='plantationDetails'>
             <h3>Plantation</h3>
-            <p>
-              La plantation se fait du {plantation_date_start} au{' '}
-              {plantation_date_end}
-            </p>
+            {plantation_date_start && (
+              <p>
+                La plantation se fait du {plantation_date_start} au{' '}
+                {plantation_date_end}
+              </p>
+            )}
             <p>{plantation_details}</p>
             <table className='spacingDetails'>
               <thead>

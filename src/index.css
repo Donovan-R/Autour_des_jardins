@@ -1017,6 +1017,7 @@ dashboard   |
   width: 90vw;
   background-color: hsla(86, 97%, 54%, 30%);
   border: solid 1px hsla(105, 92%, 52%, 0.708);
+  margin-bottom: 1rem;
 }
 
 .usersTable thead {
@@ -1128,7 +1129,6 @@ dashboard   |
 
 .commentsSection {
   background-color: var(--clr-green-dark);
-  margin-top: 1rem;
   padding: 1rem;
   color: var(--clr-green-bcg);
   border: solid 2px var(--clr-green-light);

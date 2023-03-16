@@ -64,7 +64,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
         },
       });
       setUsers(data.data);
-      setCommentsToRead(data.data.filter((user) => user.comments).lenght);
+      setCommentsToRead(data.data.filter((user) => user.comments).length);
     } catch (error) {
       console.log(error);
       showAlert('impossible', 'danger', true);
@@ -413,11 +413,11 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
 
             {newUsers
               .filter((user) => user.comments)
-              .map((user) => {
+              .map((user, index) => {
                 const { firstname, lastname, email, mobile, comments } = user;
 
                 return (
-                  <article className='commentsSection'>
+                  <article className='commentsSection' key={index}>
                     <h4>
                       {firstname} {lastname} a laissé un commentaire :
                     </h4>

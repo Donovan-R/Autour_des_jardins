@@ -11,6 +11,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
   const [plantationsTab, setPlantationsTab] = useState([]);
   let plantsTabDashboard = [...plantationsTab];
   const [users, setUsers] = useState([]);
+  const [commentsToRead, setCommentsToRead] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(false);
   // const [plantEditId, setPlantEditId] = useState('');
   const [isEditModeActive, setIsEditModeActive] = useState(false);
@@ -63,6 +64,7 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
         },
       });
       setUsers(data.data);
+      setCommentsToRead(data.data.filter((user) => user.comments).lenght);
     } catch (error) {
       console.log(error);
       showAlert('impossible', 'danger', true);
@@ -405,16 +407,17 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             })}
           </tbody>
         </table>
-        <div className='commentsSection'>
-          <h2>Commentaires</h2>
-          {newUsers
-            .filter((user) => user.comments)
-            .map((user) => {
-              const { firstname, lastname, email, mobile, comments } = user;
+        {commentsToRead > 0 && (
+          <div>
+            <h2>Commentaires</h2>
 
-              return (
-                ({ comments } && (
-                  <article>
+            {newUsers
+              .filter((user) => user.comments)
+              .map((user) => {
+                const { firstname, lastname, email, mobile, comments } = user;
+
+                return (
+                  <article className='commentsSection'>
                     <h4>
                       {firstname} {lastname} a laissé un commentaire :
                     </h4>
@@ -424,10 +427,10 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
                       {email} ou {mobile}
                     </p>
                   </article>
-                )) || <p>pas de commentaires</p>
-              );
-            })}
-        </div>
+                );
+              })}
+          </div>
+        )}
       </section>
       <hr />
       {user.name === 'donovan' && user.email === 'donoriviere@gmail.com' && (

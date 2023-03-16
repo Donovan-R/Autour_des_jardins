@@ -208,24 +208,53 @@ retour haut de page et accueil et liens |
 */
 
 .goUp {
+  display: grid;
+  place-items: center;
   position: fixed;
   bottom: 0;
   right: 0;
-  margin: 1rem;
+  margin: 0.5rem;
+  background-color: #0b0a0a;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .goUp a {
   color: var(--clr-green-middle);
-  font-size: 1.5rem;
+  height: 100%;
 }
 
 .backHome {
   color: var(--clr-green-middle);
-  font-size: 2rem;
+
   position: fixed;
   bottom: 0;
   left: 0;
-  margin: 1rem;
+  margin: 0.5rem;
+  background-color: #0b0a0a;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+}
+@media screen and (min-width: 575px) {
+  .goUp {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .goUp a {
+    font-size: 1.5rem;
+    margin-top: 5px;
+  }
+
+  .backHome {
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+  }
 }
 
 .linkPage {

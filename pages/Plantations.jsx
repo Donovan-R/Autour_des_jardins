@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegPaperPlane } from 'react-icons/fa';
 import { GiBirdHouse } from 'react-icons/gi';
 import Loading from '../components/Loading';
 import axios from 'axios';
 import PlantsList from '../components/PlantsList';
+import Goup from '../components/Goup';
 
 const Plantations = () => {
   const url = `${import.meta.env.VITE_URL}/plants/`;
@@ -67,12 +67,7 @@ const Plantations = () => {
           <GiBirdHouse />
         </span>
       </Link>
-
-      <span className='goUp'>
-        <a href='#'>
-          <FaRegPaperPlane />
-        </a>
-      </span>
+      <Goup />
     </section>
   );
 };

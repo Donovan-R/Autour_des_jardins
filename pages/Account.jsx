@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaEdit } from 'react-icons/fa';
+import Goup from '../components/Goup';
 import Alert from '../components/Alert';
 import { useNavigate } from 'react-router-dom';
 
@@ -234,6 +234,7 @@ const Account = ({ alert, showAlert, token }) => {
               </span>
             )}
           </button>
+          <Goup />
         </section>
       </>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import reglement from '.././assets/Jardins-reglement-interieur.pdf';
 import Form from '../components/Form';
-import { FaRegPaperPlane } from 'react-icons/fa';
+import Goup from '../components/Goup';
 import { GiBirdHouse } from 'react-icons/gi';
 import { GoMail, GoHome } from 'react-icons/go';
 import { SiHomeassistant } from 'react-icons/si';
@@ -48,12 +48,7 @@ const Contact = ({ alert, showAlert, setToken }) => {
           <GiBirdHouse />
         </span>
       </Link>
-
-      <span className='goUp'>
-        <a href='#'>
-          <FaRegPaperPlane />
-        </a>
-      </span>
+      <Goup />
     </section>
   );
 };

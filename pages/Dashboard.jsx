@@ -63,7 +63,6 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
         },
       });
       setUsers(data.data);
-      // setNewUserInfos(userInfos);
     } catch (error) {
       console.log(error);
       showAlert('impossible', 'danger', true);
@@ -406,6 +405,29 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             })}
           </tbody>
         </table>
+        <div className='commentsSection'>
+          <h2>Commentaires</h2>
+          {newUsers
+            .filter((user) => user.comments)
+            .map((user) => {
+              const { firstname, lastname, email, mobile, comments } = user;
+
+              return (
+                ({ comments } && (
+                  <article>
+                    <h4>
+                      {firstname} {lastname} a laissé un commentaire :
+                    </h4>
+                    <p>{comments}</p>
+                    <h4>pour lui répondre :</h4>
+                    <p>
+                      {email} ou {mobile}
+                    </p>
+                  </article>
+                )) || <p>pas de commentaires</p>
+              );
+            })}
+        </div>
       </section>
       <hr />
       {user.name === 'donovan' && user.email === 'donoriviere@gmail.com' && (

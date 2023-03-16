@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegPaperPlane } from 'react-icons/fa';
-import { GiBirdHouse } from 'react-icons/gi';
 import ReactPlayer from 'react-player';
+import Goup from '../components/Goup';
 
 const Ressources = () => {
   return (
@@ -32,16 +31,8 @@ const Ressources = () => {
           />
         </li>
       </ul>
-      {/* <Link to='/'>
-        <span className='backHome'>
-          <GiBirdHouse />
-        </span>
-      </Link>
-      <div className='goUp'>
-        <a href='#'>
-          <FaRegPaperPlane />
-        </a>
-      </div> */}
+
+      <Goup />
     </section>
   );
 };

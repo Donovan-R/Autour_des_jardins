@@ -1126,6 +1126,23 @@ dashboard   |
   border-top: solid 1px black;
 }
 
+.commentsSection {
+  background-color: var(--clr-green-dark);
+  margin-top: 1rem;
+  padding: 1rem;
+  color: var(--clr-green-bcg);
+  border: solid 2px var(--clr-green-light);
+}
+
+.commentsSection p {
+  color: var(--clr-green-deepDark);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  background-color: var(--clr-green-light);
+  width: 90%;
+  margin: auto;
+}
+
 .plantsTabDashboard {
   padding: 1rem;
   display: grid;

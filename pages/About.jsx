@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegPaperPlane, FaParking } from 'react-icons/fa';
+import { FaParking } from 'react-icons/fa';
+import Goup from '../components/Goup';
 import {
   GiBirdHouse,
   GiWateringCan,
@@ -134,11 +135,7 @@ const About = () => {
           </span>
         </Link>
 
-        <div className='goUp'>
-          <a href='#'>
-            <FaRegPaperPlane />
-          </a>
-        </div>
+        <Goup />
       </section>
     </>
   );

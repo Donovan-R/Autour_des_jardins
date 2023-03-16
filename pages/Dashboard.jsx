@@ -185,8 +185,11 @@ const Dashboard = ({ alert, showAlert, token, user }) => {
             ? plant.plantation_date_end.slice(0, 10)
             : '',
         plantation_details: plant.plantation_details,
-        sowing_details: plant.sowing_details ? plant.sowing_details : '',
-        crop: plant.crop !== undefined ? plant.crop : '',
+        sowing_details:
+          plant.sowing_details !== null && plant.sowing_details !== undefined
+            ? plant.sowing_details
+            : '',
+        crop: plant.crop !== undefined && plant.crop !== null ? plant.crop : '',
         crop_rotation: plant.crop_rotation ? plant.crop_rotation : '',
         rows_spacing_in_cm: plant.rows_spacing_in_cm,
         plants_spacing_in_cm: plant.plants_spacing_in_cm,

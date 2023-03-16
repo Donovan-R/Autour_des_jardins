@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { GiArtilleryShell, GiBirdHouse } from 'react-icons/gi';
 import axios from 'axios';
 
 const SinglePlant = () => {
@@ -23,7 +22,6 @@ const SinglePlant = () => {
           plants_ennemies: plants_ennemies_name,
         },
       } = await axios.get(`${url}${id}`);
-      console.log(plant);
       setPlantDetails(plant);
       if (sowing_inside) {
         setSowingInside(sowing_inside);
@@ -74,15 +72,7 @@ const SinglePlant = () => {
   return (
     <>
       <h2>{plant_name}</h2>
-      <section
-        // style={{
-        //   backgroundImage: 'url(' + plantDetails.img + ')',
-        //   backgroundAttachment: 'fixed',
-        //   backgroundRepeat: 'no-repeat',
-        //   backgroundSize: 'cover',
-        // }}
-        className='singlePlantSection'
-      >
+      <section className='singlePlantSection'>
         <div className='plantsTitle'>
           <div className='singlePlantPictures'>
             <img
@@ -108,7 +98,7 @@ const SinglePlant = () => {
           <div className='semisDetails'>
             {sowing_date_start_inside && (
               <>
-                <h3> Semis</h3>
+                <h3> Semis sous abri</h3>
                 <p>
                   {' '}
                   Les semis se font sous abri du {
@@ -118,10 +108,13 @@ const SinglePlant = () => {
               </>
             )}
             {sowing_date_start_outside && (
-              <h3>
-                Les semis se font en pleine terre du
-                {sowing_date_start_outside} au {sowing_date_end_outside}
-              </h3>
+              <>
+                <h3> Semis en pleine terre</h3>
+                <p>
+                  Les semis se font en pleine terre du
+                  {sowing_date_start_outside} au {sowing_date_end_outside}
+                </p>
+              </>
             )}
 
             <p>{sowing_details}</p>

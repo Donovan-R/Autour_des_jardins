@@ -4,7 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Alert from '../components/Alert';
 import axios from 'axios';
 
-const Login = ({ alert, showAlert, setToken, setUser }) => {
+const Login = ({ alert, showAlert, setToken }) => {
   //* changer password type
   const [passwordType, setPasswordType] = useState('password');
   const togglePassword = () => {
@@ -41,14 +41,11 @@ const Login = ({ alert, showAlert, setToken, setUser }) => {
         userInput
       );
       localStorage.setItem('token', data.token);
-      // localStorage.setItem('user', JSON.stringify(data.user));
+
       setToken(data.token);
-      // setUser(data.user);
-      // console.log(user);
       navigate('/todo');
     } catch (error) {
-      console.log(error);
-      showAlert('prob', 'danger', true);
+      showAlert(error.response.data.msg, 'danger', true);
       localStorage.removeItem('token');
     }
   };

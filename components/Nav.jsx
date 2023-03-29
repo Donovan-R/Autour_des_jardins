@@ -12,15 +12,8 @@ const Navbar = ({
   setUserIdentity,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [userRole, setUserRole] = useState(1);
-  // const [userIdentity, setuserIdentity] = useState({
-  //   lastname: '',
-  //   firstname: '',
-  //   mail: '',
-  // });
   const contRef = useRef(null);
   const linksRef = useRef(null);
-  // const url = `${import.meta.env.VITE_URL}/account/`;
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -42,32 +35,6 @@ const Navbar = ({
       mail: '',
     });
   };
-
-  // const getUserInfos = async () => {
-  //   try {
-  //     const {
-  //       data: { user: user },
-  //     } = await axios.get(url, {
-  //       headers: {
-  //         authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setUserRole(user[0].role_id);
-  //     setuserIdentity({
-  //       lastname: user[0].lastname,
-  //       firstname: user[0].firstname,
-  //       mail: user[0].email,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getUserInfos();
-  // }, [token]);
-
-  console.log(userRole);
 
   return (
     <>

@@ -14,33 +14,22 @@ import Account from '../pages/Account';
 import Dashboard from '../pages/Dashboard';
 import Ressources from '../pages/Ressources';
 import Error from '../pages/Error';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import axios from 'axios';
+
 const getToken = () => {
   return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
-const getUser = () => {
-  return localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : '';
-};
+// const getUser = () => {
+//   return localStorage.getItem('user')
+//     ? JSON.parse(localStorage.getItem('user'))
+//     : '';
+// };
 
 const App = () => {
+  const url = `${import.meta.env.VITE_URL}/account/`;
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
   const [token, setToken] = useState(getToken());
-  const [user, setUser] = useState(getUser());
-  const appHeight = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  };
-  // useEffect(() => {
-  //   appHeight();
-  //   window.addEventListener('resize', appHeight);
-
-  //   return () => {
-  //     window.removeEventListener('resize', appHeight);
-  //   };
-  // }, []);
 
   const showAlert = (msg = '', type = '', show = false) => {
     setAlert({
@@ -49,15 +38,58 @@ const App = () => {
       show,
     });
   };
+  const [userRole, setUserRole] = useState(1);
+  const [userIdentity, setuserIdentity] = useState({
+    lastname: '',
+    firstname: '',
+    mail: '',
+  });
+  const getUserInfos = async () => {
+    try {
+      const {
+        data: { user: user },
+      } = await axios.get(url, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUserRole(user[0].role_id);
+      setuserIdentity({
+        lastname: user[0].lastname,
+        firstname: user[0].firstname,
+        mail: user[0].email,
+      });
+    } catch (error) {
+      console.log(error);
+      setUserRole(1);
+      setuserIdentity({
+        lastname: '',
+        firstname: '',
+        mail: '',
+      });
+    }
+  };
+
+  useEffect(() => {
+    getUserInfos();
+  }, [token]);
 
   return (
     <Router>
       <h1>Autour des jardins de Chéreng</h1>
-      <ToastContainer></ToastContainer>
       <Routes>
         <Route
           path='/'
-          element={<NavShared token={token} setToken={setToken} user={user} />}
+          element={
+            <NavShared
+              token={token}
+              setToken={setToken}
+              setUserRole={setUserRole}
+              setuserIdentity={setuserIdentity}
+              userIdentity={userIdentity}
+              userRole={userRole}
+            />
+          }
         >
           <Route index element={<Home />} />
 
@@ -87,12 +119,7 @@ const App = () => {
           <Route
             path='/login'
             element={
-              <Login
-                alert={alert}
-                showAlert={showAlert}
-                setToken={setToken}
-                setUser={setUser}
-              />
+              <Login alert={alert} showAlert={showAlert} setToken={setToken} />
             }
           >
             {' '}
@@ -106,7 +133,7 @@ const App = () => {
                   alert={alert}
                   showAlert={showAlert}
                   token={token}
-                  user={user}
+                  userIdentity={userIdentity}
                 />
               </ProtectedRoute>
             }
@@ -122,12 +149,13 @@ const App = () => {
           <Route
             path='/dashboard'
             element={
-              <ProtectedRouteAdmin token={token} user={user}>
+              <ProtectedRouteAdmin token={token} userRole={userRole}>
                 <Dashboard
                   alert={alert}
                   showAlert={showAlert}
                   token={token}
-                  user={user}
+                  userIdentity={userIdentity}
+                  userRole={userRole}
                 />
               </ProtectedRouteAdmin>
             }

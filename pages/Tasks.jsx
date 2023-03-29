@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import TasksList from '../components/TasksList';
 import Alert from '../components/Alert';
 import axios from 'axios';
-import Loading from '../components/Loading';
 
-const Tasks = ({ alert, showAlert, user }) => {
+const Tasks = ({ alert, showAlert, userIdentity }) => {
   const [tasks, setTasks] = useState([]);
   const [taskAdded, setTaskAdded] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
@@ -171,7 +170,9 @@ const Tasks = ({ alert, showAlert, user }) => {
   return (
     <>
       <section className='toDoSection'>
-        <span style={{ color: 'white' }}>bienvenue {user.name}</span>
+        <span style={{ color: 'white' }}>
+          bienvenue {userIdentity.firstname}
+        </span>
         <h2>Mes tâches</h2>
         <div className='alertSection'>
           {alert.show && <Alert {...alert} removeAlert={showAlert} />}

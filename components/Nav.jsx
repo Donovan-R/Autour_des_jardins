@@ -3,10 +3,24 @@ import { linksPublic, linksPrivate } from '../src/data';
 import { FaBars } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import logo from '.././assets/logo.png';
-const Navbar = ({ token, setToken, user }) => {
+
+const Navbar = ({
+  token,
+  setToken,
+  userRole,
+  setUserRole,
+  setUserIdentity,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  // const [userRole, setUserRole] = useState(1);
+  // const [userIdentity, setuserIdentity] = useState({
+  //   lastname: '',
+  //   firstname: '',
+  //   mail: '',
+  // });
   const contRef = useRef(null);
   const linksRef = useRef(null);
+  // const url = `${import.meta.env.VITE_URL}/account/`;
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -20,9 +34,40 @@ const Navbar = ({ token, setToken, user }) => {
 
   const disconnectUser = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     setToken('');
+    setUserRole(1);
+    setUserIdentity({
+      lastname: '',
+      firstname: '',
+      mail: '',
+    });
   };
+
+  // const getUserInfos = async () => {
+  //   try {
+  //     const {
+  //       data: { user: user },
+  //     } = await axios.get(url, {
+  //       headers: {
+  //         authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setUserRole(user[0].role_id);
+  //     setuserIdentity({
+  //       lastname: user[0].lastname,
+  //       firstname: user[0].firstname,
+  //       mail: user[0].email,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getUserInfos();
+  // }, [token]);
+
+  console.log(userRole);
 
   return (
     <>
@@ -76,7 +121,7 @@ const Navbar = ({ token, setToken, user }) => {
                     </li>
                   );
                 })}
-                {user.role === 2 && (
+                {userRole === 2 && (
                   <li>
                     <NavLink
                       to='/dashboard'

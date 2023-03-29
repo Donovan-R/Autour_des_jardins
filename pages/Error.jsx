@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GiBirdHouse } from 'react-icons/gi';
 
 const Error = () => {
   return (

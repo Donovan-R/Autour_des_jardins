@@ -109,11 +109,9 @@ const App = () => {
           <Route
             path='/ressources'
             element={
-              <Ressources
-                alert={alert}
-                showAlert={showAlert}
-                setToken={setToken}
-              />
+              <ProtectedRoute token={token}>
+                <Ressources alert={alert} showAlert={showAlert} />
+              </ProtectedRoute>
             }
           ></Route>
           <Route

@@ -4,7 +4,7 @@ import potager2 from '.././assets/potager2.jpg';
 import potager3 from '.././assets/potager3.jpg';
 import potager4 from '../assets/potager4.jpg';
 import potager5 from '../assets/potager5.jpg';
-
+import { FaCloudSun, FaCloudMoon } from 'react-icons/fa';
 import Loading from './Loading';
 
 export const SimpleSlider = () => {
@@ -57,12 +57,16 @@ export const SimpleSlider = () => {
       </div>
       <div className='carousel-inner'>
         <div className='carousel-item active'>
-          <img
-            src={potager1}
-            className='d-block'
-            alt='vue générale du potager'
-            onLoad={handleLoadingImg}
-          />
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <img
+              src={potager1}
+              className='d-block'
+              alt='vue générale du potager'
+              onLoad={handleLoadingImg}
+            />
+          )}
         </div>
         <div className='carousel-item'>
           <img
@@ -104,7 +108,7 @@ export const SimpleSlider = () => {
         data-bs-slide='prev'
       >
         <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-        <span className='visually-hidden'>Previous</span>
+        <span className='visually-hidden'>previous</span>
       </button>
       <button
         className='carousel-control-next'
@@ -113,7 +117,7 @@ export const SimpleSlider = () => {
         data-bs-slide='next'
       >
         <span className='carousel-control-next-icon' aria-hidden='true'></span>
-        <span className='visually-hidden'>Next</span>
+        <span className='visually-hidden'>next</span>
       </button>
     </div>
   );

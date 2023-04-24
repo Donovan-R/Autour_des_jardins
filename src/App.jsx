@@ -61,7 +61,7 @@ const App = () => {
       });
     } catch (error) {
       console.log(error);
-      setUserRole(1);
+      setUserRole('');
       setuserIdentity({
         lastname: '',
         firstname: '',

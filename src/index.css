@@ -437,7 +437,6 @@ Form           |
 @media screen and (min-width: 600px) {
   .contactSection {
     background-image: url('../assets/potagerContact.webp');
-
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -509,7 +508,6 @@ Form           |
     place-items: unset;
   }
 }
-
 .formRow input,
 .formRow textarea {
   background-color: var(--clr-green-bcg);

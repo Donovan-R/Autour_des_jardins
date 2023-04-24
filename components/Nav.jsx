@@ -28,7 +28,7 @@ const Navbar = ({
   const disconnectUser = () => {
     localStorage.removeItem('token');
     setToken('');
-    setUserRole(1);
+    setUserRole('');
     setUserIdentity({
       lastname: '',
       firstname: '',

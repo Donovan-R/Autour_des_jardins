@@ -42,7 +42,11 @@ const Navbar = ({
         <div className='nav-center'>
           <div className='nav-header'>
             <img className='logo' src={logo} alt='logo jardins'></img>
-            <button className='nav-toggle' onClick={() => setIsOpen(!isOpen)}>
+            <button
+              className='nav-toggle'
+              title='toggle'
+              onClick={() => setIsOpen(!isOpen)}
+            >
               <FaBars />
             </button>
           </div>
